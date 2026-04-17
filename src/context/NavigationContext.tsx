@@ -40,6 +40,8 @@ interface NavigationContextValue {
   parkingDistance: number | null;
   /** Walking time in minutes from parking to first stop. */
   parkingDuration: number | null;
+  /** OSRM-calculated walking route between all stops (real paths, not straight lines). */
+  tourRoute: Coordinates[] | null;
 }
 
 const NavigationContext = createContext<NavigationContextValue | null>(null);
@@ -166,6 +168,49 @@ export function NavigationProvider({
     });
   }, [parking, effectiveRoute, isNavigating]);
 
+  // Fetch OSRM walking route for the entire tour (real paths between all stops)
+  const [tourRoute, setTourRoute] = useState<Coordinates[] | null>(null);
+
+  useEffect(() => {
+    if (!effectiveRoute || !isNavigating || effectiveRoute.stops.length < 2) {
+      setTourRoute(null);
+      return;
+    }
+
+    import('../../public/data/pois.json').then((mod) => {
+      const pois = mod.default as Array<{ slug: string; coordinates: Coordinates }>;
+      const poiMap = new Map(pois.map((p) => [p.slug, p]));
+
+      // Build OSRM waypoints string: lng,lat;lng,lat;...
+      const waypoints = effectiveRoute.stops
+        .map((stop) => {
+          const poi = poiMap.get(stop.poiSlug);
+          return poi ? `${poi.coordinates.lng},${poi.coordinates.lat}` : null;
+        })
+        .filter(Boolean)
+        .join(';');
+
+      if (!waypoints) return;
+
+      const url = `https://router.project-osrm.org/route/v1/foot/${waypoints}?overview=full&geometries=geojson`;
+
+      fetch(url)
+        .then((res) => res.json())
+        .then((data) => {
+          if (data.code === 'Ok' && data.routes?.[0]) {
+            const coords: Coordinates[] = data.routes[0].geometry.coordinates.map(
+              (c: [number, number]) => ({ lat: c[1], lng: c[0] }),
+            );
+            setTourRoute(coords);
+          }
+        })
+        .catch(() => {
+          // Fallback: straight lines if OSRM fails
+          setTourRoute(null);
+        });
+    });
+  }, [effectiveRoute, isNavigating]);
+
   const value = useMemo<NavigationContextValue>(
     () => ({
       routes,
@@ -182,6 +227,7 @@ export function NavigationProvider({
       parkingRoute,
       parkingDistance,
       parkingDuration,
+      tourRoute,
     }),
     [
       routes,
@@ -198,6 +244,7 @@ export function NavigationProvider({
       parkingRoute,
       parkingDistance,
       parkingDuration,
+      tourRoute,
     ],
   );
 

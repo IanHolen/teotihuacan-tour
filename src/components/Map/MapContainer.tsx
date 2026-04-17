@@ -64,7 +64,7 @@ interface MapContainerProps {
 
 export default function MapContainer({ pois, onPoiClick }: MapContainerProps) {
   const { position, accuracy } = useGeolocation();
-  const { activeRoute, currentStopIndex, isNavigating, parking, parkingRoute } = useNavigation();
+  const { activeRoute, currentStopIndex, isNavigating, parking, parkingRoute, tourRoute } = useNavigation();
 
   /* Build a set of active-route slugs and a slug->order map for numbering */
   const { activeSlugSet, slugToOrder } = useMemo(() => {
@@ -145,10 +145,21 @@ export default function MapContainer({ pois, onPoiClick }: MapContainerProps) {
           );
         })}
 
-      {/* Route polyline */}
-      {isNavigating && routeStopCoords.length >= 2 && (
+      {/* Tour route polyline (OSRM real walking paths or fallback straight lines) */}
+      {isNavigating && tourRoute && tourRoute.length >= 2 ? (
+        <Polyline
+          positions={tourRoute.map((c) => [c.lat, c.lng] as [number, number])}
+          pathOptions={{
+            color: '#c4956a',
+            weight: 5,
+            opacity: 0.85,
+            lineCap: 'round',
+            lineJoin: 'round',
+          }}
+        />
+      ) : isNavigating && routeStopCoords.length >= 2 ? (
         <RouteLine stops={routeStopCoords} />
-      )}
+      ) : null}
 
       {/* Center map on current stop */}
       {currentStopPoi && (
