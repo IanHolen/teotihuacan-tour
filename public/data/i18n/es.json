@@ -27,5 +27,6 @@
   "tour.completed": "Recorrido completado",
   "tour.congratulations": "¡Felicidades! Has completado tu recorrido por Teotihuacán.",
   "tour.totalTime": "Tiempo total",
-  "tour.stopsVisited": "Paradas visitadas"
+  "tour.stopsVisited": "Paradas visitadas",
+  "stops": "paradas"
 }

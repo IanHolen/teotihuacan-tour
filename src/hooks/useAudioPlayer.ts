@@ -7,6 +7,7 @@ interface AudioPlayerState {
   currentTime: number;
   duration: number;
   isLoading: boolean;
+  hasError: boolean;
   play: (url: string) => void;
   pause: () => void;
   seek: (time: number) => void;
@@ -19,6 +20,7 @@ export function useAudioPlayer(): AudioPlayerState {
   const [currentTime, setCurrentTime] = useState(0);
   const [duration, setDuration] = useState(0);
   const [isLoading, setIsLoading] = useState(false);
+  const [hasError, setHasError] = useState(false);
   const currentUrlRef = useRef<string | null>(null);
 
   // Create audio element once
@@ -34,9 +36,9 @@ export function useAudioPlayer(): AudioPlayerState {
       setIsPlaying(false);
       setCurrentTime(0);
     };
-    const onLoadStart = () => setIsLoading(true);
+    const onLoadStart = () => { setIsLoading(true); setHasError(false); };
     const onCanPlay = () => setIsLoading(false);
-    const onError = () => setIsLoading(false);
+    const onError = () => { setIsLoading(false); setHasError(true); };
 
     audio.addEventListener('timeupdate', onTimeUpdate);
     audio.addEventListener('durationchange', onDurationChange);
@@ -99,5 +101,5 @@ export function useAudioPlayer(): AudioPlayerState {
     }
   }, []);
 
-  return { isPlaying, currentTime, duration, isLoading, play, pause, seek, toggle };
+  return { isPlaying, currentTime, duration, isLoading, hasError, play, pause, seek, toggle };
 }

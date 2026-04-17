@@ -4,15 +4,15 @@ import {
   createContext,
   useCallback,
   useContext,
-  useEffect,
   useMemo,
   useState,
 } from 'react';
 import type { Route, RouteDuration } from '@/types';
+import routesData from '../../public/data/routes.json';
 
 interface NavigationContextValue {
   /** All available routes keyed by duration. */
-  routes: Record<string, Route> | null;
+  routes: Record<string, Route>;
   /** The currently selected route, or null if none. */
   activeRoute: Route | null;
   /** Select a route by its duration key. Pass null to deselect. */
@@ -38,37 +38,18 @@ export function NavigationProvider({
 }: {
   children: React.ReactNode;
 }) {
-  const [routes, setRoutes] = useState<Record<string, Route> | null>(null);
+  const [routes] = useState<Record<string, Route>>(() => {
+    const record: Record<string, Route> = {};
+    for (const route of routesData as Route[]) {
+      record[route.duration] = route;
+    }
+    return record;
+  });
   const [activeDuration, setActiveDuration] = useState<RouteDuration | null>(
     null,
   );
   const [currentStopIndex, setCurrentStopIndex] = useState(0);
   const [isNavigating, setIsNavigating] = useState(false);
-
-  // Load route data once on mount
-  useEffect(() => {
-    let cancelled = false;
-
-    async function load() {
-      try {
-        const res = await fetch('/data/routes.json');
-        if (!res.ok) throw new Error(`HTTP ${res.status}`);
-        const data: Route[] = await res.json();
-        const record: Record<string, Route> = {};
-        for (const route of data) {
-          record[route.duration] = route;
-        }
-        if (!cancelled) setRoutes(record);
-      } catch {
-        if (!cancelled) setRoutes(null);
-      }
-    }
-
-    load();
-    return () => {
-      cancelled = true;
-    };
-  }, []);
 
   const activeRoute = useMemo<Route | null>(() => {
     if (!routes || !activeDuration) return null;

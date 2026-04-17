@@ -15,7 +15,7 @@ function formatTime(seconds: number): string {
 }
 
 export default function AudioPlayer({ audioUrl, title }: AudioPlayerProps) {
-  const { isPlaying, currentTime, duration, isLoading, play, seek, toggle } =
+  const { isPlaying, currentTime, duration, isLoading, hasError, play, seek, toggle } =
     useAudioPlayer();
   const prevUrlRef = useRef<string | null>(null);
 
@@ -53,7 +53,9 @@ export default function AudioPlayer({ audioUrl, title }: AudioPlayerProps) {
       </button>
 
       <div className="flex-1 min-w-0 flex flex-col gap-1">
-        <p className="text-sm text-white truncate font-medium">{title}</p>
+        <p className="text-sm text-white truncate font-medium">
+          {title}{hasError && <span className="text-red-400 ml-2 text-xs">Audio no disponible</span>}
+        </p>
         <div className="flex items-center gap-2">
           <span className="text-xs text-white/60 w-10 text-right flex-shrink-0">
             {formatTime(currentTime)}

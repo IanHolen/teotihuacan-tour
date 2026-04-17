@@ -27,5 +27,6 @@
   "tour.completed": "Tour completed",
   "tour.congratulations": "Congratulations! You have completed your tour of Teotihuacán.",
   "tour.totalTime": "Total time",
-  "tour.stopsVisited": "Stops visited"
+  "tour.stopsVisited": "Stops visited",
+  "stops": "stops"
 }

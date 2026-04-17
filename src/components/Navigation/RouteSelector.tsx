@@ -1,8 +1,9 @@
 'use client';
 
-import { useEffect, useState } from 'react';
+import { useState } from 'react';
 import { useLanguage } from '@/context/LanguageContext';
 import type { Route, RouteDuration } from '@/types';
+import routesData from '../../../public/data/routes.json';
 
 interface RouteSelectorProps {
   onSelect: (duration: RouteDuration) => void;
@@ -17,15 +18,8 @@ const DURATION_ICONS: Record<RouteDuration, string> = {
 
 export default function RouteSelector({ onSelect }: RouteSelectorProps) {
   const { language, t } = useLanguage();
-  const [routes, setRoutes] = useState<Route[]>([]);
+  const routes = routesData as Route[];
   const [selected, setSelected] = useState<RouteDuration | null>(null);
-
-  useEffect(() => {
-    fetch('/data/routes.json')
-      .then((res) => res.json())
-      .then((data: Route[]) => setRoutes(data))
-      .catch(() => {});
-  }, []);
 
   function handleSelect(duration: RouteDuration) {
     setSelected(duration);

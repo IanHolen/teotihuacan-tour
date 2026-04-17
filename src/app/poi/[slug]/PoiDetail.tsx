@@ -1,12 +1,13 @@
 'use client';
 
-import { useEffect, useState } from 'react';
+import { useMemo, useState } from 'react';
 import Image from 'next/image';
 import { useParams, useRouter } from 'next/navigation';
 import { useLanguage } from '@/context/LanguageContext';
 import { useNavigation } from '@/context/NavigationContext';
 import AudioPlayer from '@/components/AudioPlayer/AudioPlayer';
 import type { PointOfInterest } from '@/types';
+import poisData from '../../../../public/data/pois.json';
 
 const CATEGORY_COLORS: Record<string, string> = {
   pyramid: 'bg-amber-600/20 text-amber-400',
@@ -24,28 +25,11 @@ export default function PoiDetail() {
   const { language, t } = useLanguage();
   const { startNavigation } = useNavigation();
 
-  const [poi, setPoi] = useState<PointOfInterest | null>(null);
+  const poi = useMemo<PointOfInterest | null>(
+    () => (poisData as PointOfInterest[]).find((p) => p.slug === params.slug) ?? null,
+    [params.slug],
+  );
   const [audioUrl, setAudioUrl] = useState<string | null>(null);
-  const [loading, setLoading] = useState(true);
-
-  useEffect(() => {
-    fetch('/data/pois.json')
-      .then((res) => res.json())
-      .then((data: PointOfInterest[]) => {
-        const found = data.find((p) => p.slug === params.slug) ?? null;
-        setPoi(found);
-        setLoading(false);
-      })
-      .catch(() => setLoading(false));
-  }, [params.slug]);
-
-  if (loading) {
-    return (
-      <div className="flex flex-1 items-center justify-center bg-[#1a1a2e]">
-        <div className="w-8 h-8 border-2 border-[#c4956a] border-t-transparent rounded-full animate-spin" />
-      </div>
-    );
-  }
 
   if (!poi) {
     return (

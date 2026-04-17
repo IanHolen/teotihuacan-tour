@@ -12,6 +12,7 @@ import { useGeolocation } from '@/hooks/useGeolocation';
 import { useProximity } from '@/hooks/useProximity';
 import { useRoute } from '@/hooks/useRoute';
 import type { PointOfInterest } from '@/types';
+import poisData from '../../../public/data/pois.json';
 
 export default function MapPage() {
   const router = useRouter();
@@ -19,7 +20,7 @@ export default function MapPage() {
   const navigation = useNavigation();
   const geolocation = useGeolocation();
 
-  const [pois, setPois] = useState<PointOfInterest[]>([]);
+  const pois = poisData as PointOfInterest[];
   const [selectedPoi, setSelectedPoi] = useState<PointOfInterest | null>(null);
   const [audioUrl, setAudioUrl] = useState<string | null>(null);
   const [audioTitle, setAudioTitle] = useState('');
@@ -31,14 +32,6 @@ export default function MapPage() {
   );
 
   const arrivedRef = useRef(false);
-
-  // Load POIs
-  useEffect(() => {
-    fetch('/data/pois.json')
-      .then((res) => res.json())
-      .then((data: PointOfInterest[]) => setPois(data))
-      .catch(() => {});
-  }, []);
 
   // Auto-play audio on arrival
   useEffect(() => {
