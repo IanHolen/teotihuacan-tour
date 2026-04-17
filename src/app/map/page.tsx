@@ -95,6 +95,20 @@ export default function MapPage() {
         </div>
       )}
 
+      {/* Parking route info */}
+      {navigation.parking && navigation.parkingDistance != null && (
+        <div className="absolute top-16 left-4 right-4 z-30 px-4 py-2.5 rounded-xl bg-blue-500/20 border border-blue-500/30 backdrop-blur-sm flex items-center gap-3">
+          <span className="w-8 h-8 rounded-full bg-blue-500 flex items-center justify-center text-white text-sm font-bold flex-shrink-0">P</span>
+          <div className="flex-1 min-w-0">
+            <p className="text-xs text-blue-300 truncate">{navigation.parking.name[language]}</p>
+            <p className="text-sm text-white font-medium">
+              {navigation.parkingDistance}m &middot; {navigation.parkingDuration} min
+              {language === 'es' ? ' caminando' : language === 'pt' ? ' caminhando' : ' walking'}
+            </p>
+          </div>
+        </div>
+      )}
+
       {/* Map */}
       <div className="flex-1 relative min-h-0">
         <div className="absolute inset-0">

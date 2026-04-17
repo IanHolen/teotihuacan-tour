@@ -2,7 +2,7 @@
 
 import 'leaflet/dist/leaflet.css';
 import L from 'leaflet';
-import { MapContainer as LeafletMapContainer, TileLayer, useMap } from 'react-leaflet';
+import { MapContainer as LeafletMapContainer, Marker, Polyline, TileLayer, useMap } from 'react-leaflet';
 import { useEffect, useMemo, useRef } from 'react';
 import {
   TEOTIHUACAN_CENTER,
@@ -64,7 +64,7 @@ interface MapContainerProps {
 
 export default function MapContainer({ pois, onPoiClick }: MapContainerProps) {
   const { position, accuracy } = useGeolocation();
-  const { activeRoute, currentStopIndex, isNavigating } = useNavigation();
+  const { activeRoute, currentStopIndex, isNavigating, parking, parkingRoute } = useNavigation();
 
   /* Build a set of active-route slugs and a slug->order map for numbering */
   const { activeSlugSet, slugToOrder } = useMemo(() => {
@@ -153,6 +153,32 @@ export default function MapContainer({ pois, onPoiClick }: MapContainerProps) {
       {/* Center map on current stop */}
       {currentStopPoi && (
         <FlyToStop lat={currentStopPoi.coordinates.lat} lng={currentStopPoi.coordinates.lng} />
+      )}
+
+      {/* Parking route (walking directions from parking to first stop) */}
+      {isNavigating && parkingRoute && parkingRoute.length >= 2 && (
+        <Polyline
+          positions={parkingRoute.map((c) => [c.lat, c.lng] as [number, number])}
+          pathOptions={{
+            color: '#3b82f6',
+            weight: 4,
+            opacity: 0.8,
+            dashArray: '8, 12',
+          }}
+        />
+      )}
+
+      {/* Parking marker */}
+      {isNavigating && parking && (
+        <Marker
+          position={[parking.coordinates.lat, parking.coordinates.lng]}
+          icon={L.divIcon({
+            html: '<div style="width:32px;height:32px;border-radius:50%;background:#3b82f6;border:2px solid #fff;display:flex;align-items:center;justify-content:center;color:#fff;font-size:14px;font-weight:700;box-shadow:0 2px 6px rgba(0,0,0,0.35);">P</div>',
+            className: '',
+            iconSize: [32, 32],
+            iconAnchor: [16, 16],
+          })}
+        />
       )}
 
       {/* User GPS position */}

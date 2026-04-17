@@ -7,14 +7,16 @@ import { useNavigation } from '@/context/NavigationContext';
 import LanguageSwitcher from '@/components/LanguageSwitcher';
 import RouteSelector from '@/components/Navigation/RouteSelector';
 import StartPointSelector from '@/components/Navigation/StartPointSelector';
-import type { RouteDuration } from '@/types';
+import ParkingSelector from '@/components/Navigation/ParkingSelector';
+import type { Parking, RouteDuration } from '@/types';
 
 export default function HomePage() {
   const router = useRouter();
   const { language } = useLanguage();
-  const { routes, setActiveRoute, startNavigation } = useNavigation();
+  const { routes, setActiveRoute, startNavigation, setParking } = useNavigation();
   const [selectedRoute, setSelectedRoute] = useState<RouteDuration | null>(null);
   const [startIndex, setStartIndex] = useState(0);
+  const [selectedParking, setSelectedParking] = useState<Parking | null>(null);
 
   function handleRouteSelect(duration: RouteDuration) {
     setSelectedRoute(duration);
@@ -24,6 +26,7 @@ export default function HomePage() {
   function handleStartTour() {
     if (!selectedRoute) return;
     setActiveRoute(selectedRoute);
+    setParking(selectedParking);
     startNavigation(startIndex);
     router.push('/map');
   }
@@ -82,6 +85,23 @@ export default function HomePage() {
             route={routes[selectedRoute]}
             selectedIndex={startIndex}
             onSelect={setStartIndex}
+          />
+        </div>
+      )}
+
+      {/* Parking selection */}
+      {selectedRoute && (
+        <div className="w-full max-w-md mb-6">
+          <h2 className="text-sm font-semibold text-white/40 uppercase tracking-wider mb-3">
+            {language === 'es'
+              ? '¿Dónde estacionaste?'
+              : language === 'pt'
+                ? 'Onde você estacionou?'
+                : 'Where did you park?'}
+          </h2>
+          <ParkingSelector
+            selectedId={selectedParking?.id ?? null}
+            onSelect={setSelectedParking}
           />
         </div>
       )}

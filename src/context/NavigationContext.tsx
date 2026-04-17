@@ -4,10 +4,11 @@ import {
   createContext,
   useCallback,
   useContext,
+  useEffect,
   useMemo,
   useState,
 } from 'react';
-import type { Route, RouteDuration } from '@/types';
+import type { Coordinates, Parking, Route, RouteDuration } from '@/types';
 import routesData from '../../public/data/routes.json';
 
 interface NavigationContextValue {
@@ -29,6 +30,16 @@ interface NavigationContextValue {
   startNavigation: (startIndex?: number) => void;
   /** End the current navigation session. */
   stopNavigation: () => void;
+  /** Selected parking lot, if any. */
+  parking: Parking | null;
+  /** Set the selected parking lot. */
+  setParking: (parking: Parking | null) => void;
+  /** Walking route from parking to first stop (OSRM GeoJSON coordinates). */
+  parkingRoute: Coordinates[] | null;
+  /** Distance in meters from parking to first stop. */
+  parkingDistance: number | null;
+  /** Walking time in minutes from parking to first stop. */
+  parkingDuration: number | null;
 }
 
 const NavigationContext = createContext<NavigationContextValue | null>(null);
@@ -107,6 +118,54 @@ export function NavigationProvider({
     setCurrentStopIndex(0);
   }, []);
 
+  // Parking state
+  const [parking, setParkingState] = useState<Parking | null>(null);
+  const [parkingRoute, setParkingRoute] = useState<Coordinates[] | null>(null);
+  const [parkingDistance, setParkingDistance] = useState<number | null>(null);
+  const [parkingDuration, setParkingDuration] = useState<number | null>(null);
+
+  const setParking = useCallback((p: Parking | null) => {
+    setParkingState(p);
+    setParkingRoute(null);
+    setParkingDistance(null);
+    setParkingDuration(null);
+  }, []);
+
+  // Fetch OSRM walking route when parking + route are both set
+  useEffect(() => {
+    if (!parking || !effectiveRoute || !isNavigating) {
+      setParkingRoute(null);
+      return;
+    }
+    const firstStop = effectiveRoute.stops[0];
+    if (!firstStop) return;
+
+    // Find the POI coordinates for the first stop
+    // We import poisData here to resolve coordinates
+    import('../../public/data/pois.json').then((mod) => {
+      const pois = mod.default as Array<{ slug: string; coordinates: Coordinates }>;
+      const poi = pois.find((p) => p.slug === firstStop.poiSlug);
+      if (!poi) return;
+
+      const url = `https://router.project-osrm.org/route/v1/foot/${parking.coordinates.lng},${parking.coordinates.lat};${poi.coordinates.lng},${poi.coordinates.lat}?overview=full&geometries=geojson`;
+
+      fetch(url)
+        .then((res) => res.json())
+        .then((data) => {
+          if (data.code === 'Ok' && data.routes?.[0]) {
+            const route = data.routes[0];
+            const coords: Coordinates[] = route.geometry.coordinates.map(
+              (c: [number, number]) => ({ lat: c[1], lng: c[0] }),
+            );
+            setParkingRoute(coords);
+            setParkingDistance(Math.round(route.distance));
+            setParkingDuration(Math.round(route.duration / 60));
+          }
+        })
+        .catch(() => {});
+    });
+  }, [parking, effectiveRoute, isNavigating]);
+
   const value = useMemo<NavigationContextValue>(
     () => ({
       routes,
@@ -118,6 +177,11 @@ export function NavigationProvider({
       isNavigating,
       startNavigation,
       stopNavigation,
+      parking,
+      setParking,
+      parkingRoute,
+      parkingDistance,
+      parkingDuration,
     }),
     [
       routes,
@@ -129,6 +193,11 @@ export function NavigationProvider({
       isNavigating,
       startNavigation,
       stopNavigation,
+      parking,
+      setParking,
+      parkingRoute,
+      parkingDistance,
+      parkingDuration,
     ],
   );
 

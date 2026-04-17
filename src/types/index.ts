@@ -34,3 +34,9 @@ export interface Route {
   totalStops: number;
   stops: RouteStop[];
 }
+
+export interface Parking {
+  id: string;
+  coordinates: Coordinates;
+  name: Record<Language, string>;
+}

@@ -1,0 +1,38 @@
+[
+  {
+    "id": "parking-puerta-1",
+    "coordinates": { "lat": 19.6835, "lng": -98.8440 },
+    "name": {
+      "es": "Estacionamiento Puerta 1 (Principal)",
+      "pt": "Estacionamento Porta 1 (Principal)",
+      "en": "Parking Gate 1 (Main)"
+    }
+  },
+  {
+    "id": "parking-puerta-2",
+    "coordinates": { "lat": 19.6920, "lng": -98.8408 },
+    "name": {
+      "es": "Estacionamiento Puerta 2 (Pirámide del Sol)",
+      "pt": "Estacionamento Porta 2 (Pirâmide do Sol)",
+      "en": "Parking Gate 2 (Pyramid of the Sun)"
+    }
+  },
+  {
+    "id": "parking-puerta-3",
+    "coordinates": { "lat": 19.6975, "lng": -98.8445 },
+    "name": {
+      "es": "Estacionamiento Puerta 3 (Pirámide de la Luna)",
+      "pt": "Estacionamento Porta 3 (Pirâmide da Lua)",
+      "en": "Parking Gate 3 (Pyramid of the Moon)"
+    }
+  },
+  {
+    "id": "parking-puerta-5",
+    "coordinates": { "lat": 19.6958, "lng": -98.8475 },
+    "name": {
+      "es": "Estacionamiento Puerta 5 (Oeste)",
+      "pt": "Estacionamento Porta 5 (Oeste)",
+      "en": "Parking Gate 5 (West)"
+    }
+  }
+]
