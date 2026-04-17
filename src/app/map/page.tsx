@@ -109,21 +109,10 @@ export default function MapPage() {
         </div>
       )}
 
-      {/* Map — only render after navigation data is confirmed ready */}
+      {/* Map */}
       <div className="flex-1 relative min-h-0">
         <div className="absolute inset-0">
-          {navigation.isNavigating && navigation.activeRoute ? (
-            <DynamicMap pois={pois} onPoiClick={handlePoiClick} />
-          ) : (
-            <div className="h-full w-full flex items-center justify-center bg-[#1a1a2e]">
-              <div className="text-center">
-                <div className="w-12 h-12 mx-auto mb-3 rounded-full border-4 border-white/10 border-t-[#c4956a] animate-spin" />
-                <p className="text-white/40 text-sm font-medium">
-                  {language === 'es' ? 'Cargando mapa...' : language === 'pt' ? 'Carregando mapa...' : 'Loading map...'}
-                </p>
-              </div>
-            </div>
-          )}
+          <DynamicMap pois={pois} onPoiClick={handlePoiClick} />
         </div>
       </div>
 

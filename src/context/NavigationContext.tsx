@@ -26,8 +26,8 @@ interface NavigationContextValue {
   goBack: () => void;
   /** Whether a navigation session is in progress. */
   isNavigating: boolean;
-  /** Begin a navigation session for the active route, optionally starting at a specific stop. */
-  startNavigation: (startIndex?: number) => void;
+  /** Begin a navigation session. Pass duration to set route + start in one call. */
+  startNavigation: (startIndex?: number, duration?: RouteDuration) => void;
   /** End the current navigation session. */
   stopNavigation: () => void;
   /** Selected parking lot, if any. */
@@ -92,27 +92,27 @@ export function NavigationProvider({
     setCurrentStopIndex((prev) => (prev > 0 ? prev - 1 : prev));
   }, []);
 
-  const startNavigation = useCallback((startIndex?: number) => {
-    if (!baseRoute) return;
+  const startNavigation = useCallback((startIndex?: number, duration?: RouteDuration) => {
+    // Resolve route: use provided duration (for same-event-handler calls) or fall back to baseRoute
+    const route = duration ? routes[duration] ?? baseRoute : baseRoute;
+    if (!route) return;
+
+    if (duration) setActiveDuration(duration);
+
     const idx = startIndex ?? 0;
     if (idx === 0) {
-      // No reordering needed
-      setActiveRouteState(baseRoute);
+      setActiveRouteState(route);
     } else {
-      // Reorder stops starting from the selected index
-      const original = baseRoute.stops;
+      const original = route.stops;
       const reordered = [
         ...original.slice(idx),
         ...original.slice(0, idx),
       ].map((stop, i) => ({ ...stop, order: i + 1 }));
-      setActiveRouteState({
-        ...baseRoute,
-        stops: reordered,
-      });
+      setActiveRouteState({ ...route, stops: reordered });
     }
     setCurrentStopIndex(0);
     setIsNavigating(true);
-  }, [baseRoute]);
+  }, [routes, baseRoute]);
 
   const stopNavigation = useCallback(() => {
     setIsNavigating(false);

@@ -25,9 +25,8 @@ export default function HomePage() {
 
   function handleStartTour() {
     if (!selectedRoute) return;
-    setActiveRoute(selectedRoute);
     setParking(selectedParking);
-    startNavigation(startIndex);
+    startNavigation(startIndex, selectedRoute);
     router.push('/map');
   }
 
