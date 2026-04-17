@@ -103,24 +103,26 @@ export default function MapContainer({ pois, onPoiClick }: MapContainerProps) {
         url="https://{s}.tile.openstreetmap.org/{z}/{x}/{y}.png"
       />
 
-      {/* POI markers */}
-      {pois.map((poi) => {
-        const order = slugToOrder.get(poi.slug);
-        const isOnRoute = activeSlugSet.has(poi.slug);
-        const isActive = isNavigating && isOnRoute && order === currentStopIndex + 1;
-        const isVisited = isNavigating && isOnRoute && order != null && order < currentStopIndex + 1;
+      {/* POI markers — only show route POIs when navigating */}
+      {pois
+        .filter((poi) => !isNavigating || activeSlugSet.has(poi.slug))
+        .map((poi) => {
+          const order = slugToOrder.get(poi.slug);
+          const isOnRoute = activeSlugSet.has(poi.slug);
+          const isActive = isNavigating && isOnRoute && order === currentStopIndex + 1;
+          const isVisited = isNavigating && isOnRoute && order != null && order < currentStopIndex + 1;
 
-        return (
-          <POIMarker
-            key={poi.slug}
-            poi={poi}
-            isActive={isActive}
-            isVisited={isVisited}
-            stopNumber={isOnRoute ? order : undefined}
-            onClick={() => onPoiClick(poi)}
-          />
-        );
-      })}
+          return (
+            <POIMarker
+              key={poi.slug}
+              poi={poi}
+              isActive={isActive}
+              isVisited={isVisited}
+              stopNumber={isOnRoute ? order : undefined}
+              onClick={() => onPoiClick(poi)}
+            />
+          );
+        })}
 
       {/* Route polyline */}
       {isNavigating && routeStopCoords.length >= 2 && (
