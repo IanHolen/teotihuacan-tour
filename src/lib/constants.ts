@@ -1,13 +1,13 @@
 import type { Language, Coordinates } from '@/types';
 
 export const TEOTIHUACAN_CENTER: Coordinates = {
-  lat: 19.6925,
-  lng: -98.844,
+  lat: 19.6900,
+  lng: -98.8442,
 };
 
 export const TEOTIHUACAN_BOUNDS: [[number, number], [number, number]] = [
-  [19.684, -98.855],
-  [19.7, -98.83],
+  [19.680, -98.855],
+  [19.702, -98.830],
 ];
 
 /** Distance in meters at which the user is considered to have arrived. */

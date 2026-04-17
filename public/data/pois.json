@@ -2,8 +2,8 @@
   {
     "slug": "puerta-1",
     "coordinates": {
-      "lat": 19.6878,
-      "lng": -98.8432
+      "lat": 19.6838,
+      "lng": -98.8435
     },
     "category": "gate",
     "name": {
@@ -29,8 +29,8 @@
   {
     "slug": "ciudadela",
     "coordinates": {
-      "lat": 19.6882,
-      "lng": -98.844
+      "lat": 19.6847,
+      "lng": -98.8449
     },
     "category": "temple",
     "name": {
@@ -56,8 +56,8 @@
   {
     "slug": "templo-quetzalcoatl",
     "coordinates": {
-      "lat": 19.6885,
-      "lng": -98.8445
+      "lat": 19.6843,
+      "lng": -98.8443
     },
     "category": "temple",
     "name": {
@@ -83,8 +83,8 @@
   {
     "slug": "calzada-muertos",
     "coordinates": {
-      "lat": 19.692,
-      "lng": -98.844
+      "lat": 19.6900,
+      "lng": -98.8440
     },
     "category": "plaza",
     "name": {
@@ -110,8 +110,8 @@
   {
     "slug": "piramide-sol",
     "coordinates": {
-      "lat": 19.6925,
-      "lng": -98.8438
+      "lat": 19.6929,
+      "lng": -98.8432
     },
     "category": "pyramid",
     "name": {
@@ -143,8 +143,8 @@
   {
     "slug": "piramide-luna",
     "coordinates": {
-      "lat": 19.6953,
-      "lng": -98.8441
+      "lat": 19.6967,
+      "lng": -98.8442
     },
     "category": "pyramid",
     "name": {
@@ -176,8 +176,8 @@
   {
     "slug": "plaza-luna",
     "coordinates": {
-      "lat": 19.6948,
-      "lng": -98.8441
+      "lat": 19.6960,
+      "lng": -98.8442
     },
     "category": "plaza",
     "name": {
@@ -203,8 +203,8 @@
   {
     "slug": "palacio-quetzalpapalotl",
     "coordinates": {
-      "lat": 19.695,
-      "lng": -98.8448
+      "lat": 19.6958,
+      "lng": -98.8456
     },
     "category": "palace",
     "name": {
@@ -230,8 +230,8 @@
   {
     "slug": "murales-puma",
     "coordinates": {
-      "lat": 19.6946,
-      "lng": -98.8452
+      "lat": 19.6953,
+      "lng": -98.8460
     },
     "category": "mural",
     "name": {
@@ -257,7 +257,7 @@
   {
     "slug": "museo-sitio",
     "coordinates": {
-      "lat": 19.689,
+      "lat": 19.6855,
       "lng": -98.8425
     },
     "category": "museum",
