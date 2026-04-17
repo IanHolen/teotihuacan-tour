@@ -1,7 +1,6 @@
 'use client';
 
 import { useMemo, useState } from 'react';
-import Image from 'next/image';
 import { useParams, useRouter } from 'next/navigation';
 import { useLanguage } from '@/context/LanguageContext';
 import { useNavigation } from '@/context/NavigationContext';
@@ -17,6 +16,26 @@ const CATEGORY_COLORS: Record<string, string> = {
   plaza: 'bg-green-600/20 text-green-400',
   mural: 'bg-rose-600/20 text-rose-400',
   gate: 'bg-gray-600/20 text-gray-400',
+};
+
+const CATEGORY_GRADIENTS: Record<string, string> = {
+  pyramid: 'from-amber-900/80 via-orange-800/60 to-[#16213e]',
+  temple: 'from-purple-900/80 via-violet-800/60 to-[#16213e]',
+  palace: 'from-blue-900/80 via-indigo-800/60 to-[#16213e]',
+  museum: 'from-teal-900/80 via-cyan-800/60 to-[#16213e]',
+  plaza: 'from-green-900/80 via-emerald-800/60 to-[#16213e]',
+  mural: 'from-rose-900/80 via-pink-800/60 to-[#16213e]',
+  gate: 'from-gray-800/80 via-slate-700/60 to-[#16213e]',
+};
+
+const CATEGORY_ICONS: Record<string, string> = {
+  pyramid: 'M12 2L2 19h20L12 2z M12 2v17 M7 12h10',
+  temple: 'M3 21h18 M5 21V7l7-4 7 4v14 M9 21v-6h6v6',
+  palace: 'M3 21h18 M9 21V12h6v9 M12 3L2 9h20L12 3z',
+  museum: 'M4 21h16 M4 10h16 M12 3l8 7H4l8-7z M8 10v7 M16 10v7 M12 10v7',
+  plaza: 'M21 12a9 9 0 11-18 0 9 9 0 0118 0z M12 3v18 M3 12h18',
+  mural: 'M4 4h16v16H4V4z M4 12h16 M12 4v16 M8 4v8 M16 12v8',
+  gate: 'M3 21h18 M7 21V10l5-7 5 7v11 M10 21v-4h4v4',
 };
 
 export default function PoiDetail() {
@@ -57,12 +76,14 @@ export default function PoiDetail() {
     <div className="flex flex-col flex-1 bg-[#1a1a2e] pb-24">
       {/* Header image area */}
       <div className="relative w-full h-56 bg-[#16213e] overflow-hidden">
-        <Image
-          src={`/images/pois/${poi.image}`}
-          alt={poi.name[language]}
-          fill
-          className="object-cover opacity-80"
-        />
+        <div className={`absolute inset-0 bg-gradient-to-br ${CATEGORY_GRADIENTS[poi.category] ?? 'from-slate-800 to-[#16213e]'}`} />
+        <div className="absolute inset-0 flex items-center justify-center opacity-20">
+          <svg className="w-24 h-24 text-white" viewBox="0 0 24 24" fill="none" stroke="currentColor" strokeWidth="1">
+            {(CATEGORY_ICONS[poi.category] ?? '').split(' M').map((d, i) => (
+              <path key={i} d={i === 0 ? d : `M${d}`} />
+            ))}
+          </svg>
+        </div>
         <div className="absolute inset-0 bg-gradient-to-t from-[#1a1a2e] via-transparent to-transparent" />
 
         {/* Back button */}
