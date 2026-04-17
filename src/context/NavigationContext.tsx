@@ -53,8 +53,12 @@ export function NavigationProvider({
       try {
         const res = await fetch('/data/routes.json');
         if (!res.ok) throw new Error(`HTTP ${res.status}`);
-        const data: Record<string, Route> = await res.json();
-        if (!cancelled) setRoutes(data);
+        const data: Route[] = await res.json();
+        const record: Record<string, Route> = {};
+        for (const route of data) {
+          record[route.duration] = route;
+        }
+        if (!cancelled) setRoutes(record);
       } catch {
         if (!cancelled) setRoutes(null);
       }

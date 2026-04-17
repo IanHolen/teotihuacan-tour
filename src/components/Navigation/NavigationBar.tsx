@@ -8,7 +8,6 @@ interface NavigationBarProps {
   currentPoi: PointOfInterest | null;
   nextPoi: PointOfInterest | null;
   distance: number | null;
-  progress: number;
   totalStops: number;
   currentIndex: number;
   onSkip: () => void;
@@ -20,7 +19,6 @@ export default function NavigationBar({
   currentPoi,
   nextPoi,
   distance,
-  progress,
   totalStops,
   currentIndex,
   onSkip,

@@ -66,6 +66,8 @@ export function useAudioPlayer(): AudioPlayerState {
     if (!audio) return;
 
     if (currentUrlRef.current !== url) {
+      audio.pause();
+      audio.currentTime = 0;
       audio.src = url;
       currentUrlRef.current = url;
     }

@@ -15,7 +15,7 @@ function formatTime(seconds: number): string {
 }
 
 export default function AudioPlayer({ audioUrl, title }: AudioPlayerProps) {
-  const { isPlaying, currentTime, duration, isLoading, play, pause, seek, toggle } =
+  const { isPlaying, currentTime, duration, isLoading, play, seek, toggle } =
     useAudioPlayer();
   const prevUrlRef = useRef<string | null>(null);
 
@@ -27,8 +27,6 @@ export default function AudioPlayer({ audioUrl, title }: AudioPlayerProps) {
   }, [audioUrl, play]);
 
   if (!audioUrl) return null;
-
-  const progress = duration > 0 ? (currentTime / duration) * 100 : 0;
 
   return (
     <div className="fixed bottom-0 left-0 right-0 z-50 h-20 bg-[#16213e] border-t border-white/10 px-4 flex items-center gap-3">

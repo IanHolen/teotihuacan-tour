@@ -30,13 +30,13 @@ function getInitialLanguage(): Language {
 }
 
 export function LanguageProvider({ children }: { children: React.ReactNode }) {
-  const [language, setLanguageState] = useState<Language>(DEFAULT_LANGUAGE);
+  const [language, setLanguageState] = useState<Language>(getInitialLanguage);
   const [translations, setTranslations] = useState<Record<string, string>>({});
 
-  // Hydrate from localStorage on mount
+  // Sync html lang attribute with selected language
   useEffect(() => {
-    setLanguageState(getInitialLanguage());
-  }, []);
+    document.documentElement.lang = language;
+  }, [language]);
 
   // Fetch translations whenever language changes
   useEffect(() => {

@@ -10,7 +10,7 @@ import type { RouteDuration } from '@/types';
 
 export default function HomePage() {
   const router = useRouter();
-  const { language, t } = useLanguage();
+  const { language } = useLanguage();
   const { setActiveRoute, startNavigation } = useNavigation();
   const [selectedRoute, setSelectedRoute] = useState<RouteDuration | null>(null);
 

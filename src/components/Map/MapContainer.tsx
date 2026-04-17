@@ -90,8 +90,8 @@ export default function MapContainer({ pois, onPoiClick }: MapContainerProps) {
       {pois.map((poi) => {
         const order = slugToOrder.get(poi.slug);
         const isOnRoute = activeSlugSet.has(poi.slug);
-        const isActive = isNavigating && isOnRoute && order === currentStopIndex;
-        const isVisited = isNavigating && isOnRoute && order != null && order < currentStopIndex;
+        const isActive = isNavigating && isOnRoute && order === currentStopIndex + 1;
+        const isVisited = isNavigating && isOnRoute && order != null && order < currentStopIndex + 1;
 
         return (
           <POIMarker

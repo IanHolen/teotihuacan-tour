@@ -1,6 +1,7 @@
 'use client';
 
 import { useEffect, useState } from 'react';
+import Image from 'next/image';
 import { useParams, useRouter } from 'next/navigation';
 import { useLanguage } from '@/context/LanguageContext';
 import { useNavigation } from '@/context/NavigationContext';
@@ -72,10 +73,11 @@ export default function PoiDetail() {
     <div className="flex flex-col flex-1 bg-[#1a1a2e] pb-24">
       {/* Header image area */}
       <div className="relative w-full h-56 bg-[#16213e] overflow-hidden">
-        <img
-          src={poi.image}
+        <Image
+          src={`/images/pois/${poi.image}`}
           alt={poi.name[language]}
-          className="w-full h-full object-cover opacity-80"
+          fill
+          className="object-cover opacity-80"
         />
         <div className="absolute inset-0 bg-gradient-to-t from-[#1a1a2e] via-transparent to-transparent" />
 

@@ -8,7 +8,6 @@ import NavigationBar from '@/components/Navigation/NavigationBar';
 import StopCard from '@/components/Navigation/StopCard';
 import { useLanguage } from '@/context/LanguageContext';
 import { useNavigation } from '@/context/NavigationContext';
-import { useAudioPlayer } from '@/hooks/useAudioPlayer';
 import { useGeolocation } from '@/hooks/useGeolocation';
 import { useProximity } from '@/hooks/useProximity';
 import { useRoute } from '@/hooks/useRoute';
@@ -19,7 +18,6 @@ export default function MapPage() {
   const { language } = useLanguage();
   const navigation = useNavigation();
   const geolocation = useGeolocation();
-  const { play } = useAudioPlayer();
 
   const [pois, setPois] = useState<PointOfInterest[]>([]);
   const [selectedPoi, setSelectedPoi] = useState<PointOfInterest | null>(null);
@@ -47,7 +45,7 @@ export default function MapPage() {
     if (proximity.hasArrived && routeInfo.currentStopPoi && !arrivedRef.current) {
       arrivedRef.current = true;
       const poi = routeInfo.currentStopPoi;
-      setAudioUrl(poi.audioFile);
+      setAudioUrl(`/audio/${language}/${poi.audioFile}`);
       setAudioTitle(poi.name[language]);
     }
     if (!proximity.hasArrived) {
@@ -66,7 +64,7 @@ export default function MapPage() {
     (poi?: PointOfInterest | null) => {
       const target = poi ?? routeInfo.currentStopPoi;
       if (target) {
-        setAudioUrl(target.audioFile);
+        setAudioUrl(`/audio/${language}/${target.audioFile}`);
         setAudioTitle(target.name[language]);
       }
     },
@@ -96,6 +94,13 @@ export default function MapPage() {
           <path d="M15 18l-6-6 6-6" />
         </svg>
       </button>
+
+      {/* Simulated location indicator */}
+      {geolocation.isSimulated && (
+        <div className="absolute top-4 right-4 z-30 px-3 py-1.5 rounded-full bg-amber-500/20 border border-amber-500/30 backdrop-blur-sm">
+          <span className="text-xs font-medium text-amber-400">DEV: GPS simulado</span>
+        </div>
+      )}
 
       {/* Map */}
       <div className="flex-1">
@@ -134,7 +139,6 @@ export default function MapPage() {
           currentPoi={routeInfo.currentStopPoi}
           nextPoi={routeInfo.nextStopPoi}
           distance={proximity.distance}
-          progress={routeInfo.progress}
           totalStops={routeInfo.totalStops}
           currentIndex={routeInfo.currentIndex}
           onSkip={navigation.advanceStop}
