@@ -25,8 +25,8 @@ interface NavigationContextValue {
   goBack: () => void;
   /** Whether a navigation session is in progress. */
   isNavigating: boolean;
-  /** Begin a navigation session for the active route. */
-  startNavigation: () => void;
+  /** Begin a navigation session for the active route, optionally starting at a specific stop. */
+  startNavigation: (startIndex?: number) => void;
   /** End the current navigation session. */
   stopNavigation: () => void;
 }
@@ -73,9 +73,9 @@ export function NavigationProvider({
     setCurrentStopIndex((prev) => (prev > 0 ? prev - 1 : prev));
   }, []);
 
-  const startNavigation = useCallback(() => {
+  const startNavigation = useCallback((startIndex?: number) => {
     if (activeRoute) {
-      setCurrentStopIndex(0);
+      setCurrentStopIndex(startIndex ?? 0);
       setIsNavigating(true);
     }
   }, [activeRoute]);

@@ -6,18 +6,25 @@ import { useLanguage } from '@/context/LanguageContext';
 import { useNavigation } from '@/context/NavigationContext';
 import LanguageSwitcher from '@/components/LanguageSwitcher';
 import RouteSelector from '@/components/Navigation/RouteSelector';
+import StartPointSelector from '@/components/Navigation/StartPointSelector';
 import type { RouteDuration } from '@/types';
 
 export default function HomePage() {
   const router = useRouter();
   const { language } = useLanguage();
-  const { setActiveRoute, startNavigation } = useNavigation();
+  const { routes, setActiveRoute, startNavigation } = useNavigation();
   const [selectedRoute, setSelectedRoute] = useState<RouteDuration | null>(null);
+  const [startIndex, setStartIndex] = useState(0);
+
+  function handleRouteSelect(duration: RouteDuration) {
+    setSelectedRoute(duration);
+    setStartIndex(0);
+  }
 
   function handleStartTour() {
     if (!selectedRoute) return;
     setActiveRoute(selectedRoute);
-    startNavigation();
+    startNavigation(startIndex);
     router.push('/map');
   }
 
@@ -58,8 +65,26 @@ export default function HomePage() {
               ? 'Escolha sua rota'
               : 'Choose your route'}
         </h2>
-        <RouteSelector onSelect={setSelectedRoute} />
+        <RouteSelector onSelect={handleRouteSelect} />
       </div>
+
+      {/* Start point selection */}
+      {selectedRoute && routes[selectedRoute] && (
+        <div className="w-full max-w-md mb-6">
+          <h2 className="text-sm font-semibold text-white/40 uppercase tracking-wider mb-3">
+            {language === 'es'
+              ? '¿Desde dónde empiezas?'
+              : language === 'pt'
+                ? 'De onde você começa?'
+                : 'Where do you start?'}
+          </h2>
+          <StartPointSelector
+            route={routes[selectedRoute]}
+            selectedIndex={startIndex}
+            onSelect={setStartIndex}
+          />
+        </div>
+      )}
 
       {/* Start button */}
       <div className="w-full max-w-md mt-auto">
