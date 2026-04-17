@@ -2,8 +2,8 @@
 
 import 'leaflet/dist/leaflet.css';
 import L from 'leaflet';
-import { MapContainer as LeafletMapContainer, TileLayer } from 'react-leaflet';
-import { useMemo } from 'react';
+import { MapContainer as LeafletMapContainer, TileLayer, useMap } from 'react-leaflet';
+import { useEffect, useMemo } from 'react';
 import {
   TEOTIHUACAN_CENTER,
   TEOTIHUACAN_BOUNDS,
@@ -26,6 +26,15 @@ L.Icon.Default.mergeOptions({
   iconUrl: 'https://unpkg.com/leaflet@1.9.4/dist/images/marker-icon.png',
   shadowUrl: 'https://unpkg.com/leaflet@1.9.4/dist/images/marker-shadow.png',
 });
+
+/* ---------- Fly to current stop when it changes ---------- */
+function FlyToStop({ lat, lng }: { lat: number; lng: number }) {
+  const map = useMap();
+  useEffect(() => {
+    map.flyTo([lat, lng], DEFAULT_ZOOM, { duration: 0.8 });
+  }, [map, lat, lng]);
+  return null;
+}
 
 /* ---------- Props ---------- */
 interface MapContainerProps {
@@ -63,6 +72,14 @@ export default function MapContainer({ pois, onPoiClick }: MapContainerProps) {
       })
       .filter(Boolean) as { coordinates: { lat: number; lng: number } }[];
   }, [activeRoute, pois]);
+
+  /* Current stop POI for map centering */
+  const currentStopPoi = useMemo(() => {
+    if (!activeRoute || !isNavigating) return null;
+    const stop = activeRoute.stops[currentStopIndex];
+    if (!stop) return null;
+    return pois.find((p) => p.slug === stop.poiSlug) ?? null;
+  }, [activeRoute, currentStopIndex, isNavigating, pois]);
 
   const bounds = L.latLngBounds(
     TEOTIHUACAN_BOUNDS[0] as [number, number],
@@ -108,6 +125,11 @@ export default function MapContainer({ pois, onPoiClick }: MapContainerProps) {
       {/* Route polyline */}
       {isNavigating && routeStopCoords.length >= 2 && (
         <RouteLine stops={routeStopCoords} />
+      )}
+
+      {/* Center map on current stop */}
+      {currentStopPoi && (
+        <FlyToStop lat={currentStopPoi.coordinates.lat} lng={currentStopPoi.coordinates.lng} />
       )}
 
       {/* User GPS position */}

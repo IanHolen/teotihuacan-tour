@@ -16,14 +16,26 @@ export default function RouteLine({ stops }: RouteLineProps) {
   ]);
 
   return (
-    <Polyline
-      positions={positions}
-      pathOptions={{
-        color: '#c4956a',
-        weight: 3,
-        dashArray: '10, 10',
-        opacity: 0.85,
-      }}
-    />
+    <>
+      {/* Shadow line for contrast */}
+      <Polyline
+        positions={positions}
+        pathOptions={{
+          color: '#000000',
+          weight: 6,
+          opacity: 0.3,
+        }}
+      />
+      {/* Main route line */}
+      <Polyline
+        positions={positions}
+        pathOptions={{
+          color: '#c4956a',
+          weight: 4,
+          opacity: 0.9,
+          dashArray: '12, 8',
+        }}
+      />
+    </>
   );
 }

@@ -35,7 +35,7 @@ export default function RootLayout({
 }>) {
   return (
     <html lang="es" className={`${geist.variable} h-full antialiased`}>
-      <body className="min-h-full flex flex-col bg-[#1a1a2e] text-white font-[family-name:var(--font-geist)]">
+      <body suppressHydrationWarning className="min-h-full flex flex-col bg-[#1a1a2e] text-white font-[family-name:var(--font-geist)]">
         <Providers>{children}</Providers>
       </body>
     </html>
