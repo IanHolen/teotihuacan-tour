@@ -3,7 +3,7 @@
 import 'leaflet/dist/leaflet.css';
 import L from 'leaflet';
 import { MapContainer as LeafletMapContainer, TileLayer, useMap } from 'react-leaflet';
-import { useEffect, useMemo } from 'react';
+import { useEffect, useMemo, useRef } from 'react';
 import {
   TEOTIHUACAN_CENTER,
   TEOTIHUACAN_BOUNDS,
@@ -27,10 +27,30 @@ L.Icon.Default.mergeOptions({
   shadowUrl: 'https://unpkg.com/leaflet@1.9.4/dist/images/marker-shadow.png',
 });
 
+/* ---------- Invalidate map size after mount (fixes flex container sizing) ---------- */
+function MapReady() {
+  const map = useMap();
+  useEffect(() => {
+    // Give the container a frame to settle, then tell Leaflet to recalculate
+    const timer = setTimeout(() => map.invalidateSize(), 100);
+    return () => clearTimeout(timer);
+  }, [map]);
+  return null;
+}
+
 /* ---------- Fly to current stop when it changes ---------- */
 function FlyToStop({ lat, lng }: { lat: number; lng: number }) {
   const map = useMap();
+  const isFirstRef = useRef(true);
   useEffect(() => {
+    if (isFirstRef.current) {
+      // On first mount, use setView (no animation) after a short delay
+      isFirstRef.current = false;
+      const timer = setTimeout(() => {
+        map.setView([lat, lng], DEFAULT_ZOOM);
+      }, 200);
+      return () => clearTimeout(timer);
+    }
     map.flyTo([lat, lng], DEFAULT_ZOOM, { duration: 0.8 });
   }, [map, lat, lng]);
   return null;
@@ -98,6 +118,7 @@ export default function MapContainer({ pois, onPoiClick }: MapContainerProps) {
       className="h-full w-full z-0"
       style={{ height: '100%', width: '100%' }}
     >
+      <MapReady />
       <TileLayer
         attribution='&copy; <a href="https://www.openstreetmap.org/copyright">OpenStreetMap</a> contributors'
         url="https://{s}.tile.openstreetmap.org/{z}/{x}/{y}.png"
