@@ -10,8 +10,17 @@ import {
 } from 'react';
 import type { Language } from '@/types';
 import { DEFAULT_LANGUAGE } from '@/lib/constants';
+import esTranslations from '../../public/data/i18n/es.json';
+import enTranslations from '../../public/data/i18n/en.json';
+import ptTranslations from '../../public/data/i18n/pt.json';
 
 const STORAGE_KEY = 'teotihuacan-tour-language';
+
+const I18N: Record<Language, Record<string, string>> = {
+  es: esTranslations,
+  en: enTranslations,
+  pt: ptTranslations,
+};
 
 interface LanguageContextValue {
   language: Language;
@@ -22,42 +31,26 @@ interface LanguageContextValue {
 
 const LanguageContext = createContext<LanguageContextValue | null>(null);
 
-function getInitialLanguage(): Language {
-  if (typeof window === 'undefined') return DEFAULT_LANGUAGE;
-  const stored = localStorage.getItem(STORAGE_KEY);
-  if (stored === 'es' || stored === 'pt' || stored === 'en') return stored;
-  return DEFAULT_LANGUAGE;
-}
-
 export function LanguageProvider({ children }: { children: React.ReactNode }) {
-  const [language, setLanguageState] = useState<Language>(getInitialLanguage);
-  const [translations, setTranslations] = useState<Record<string, string>>({});
+  const [language, setLanguageState] = useState<Language>(DEFAULT_LANGUAGE);
+  // Read stored language preference after mount to avoid hydration mismatch
+  useEffect(() => {
+    try {
+      const stored = localStorage.getItem(STORAGE_KEY);
+      if (stored === 'es' || stored === 'pt' || stored === 'en') {
+        setLanguageState(stored);
+      }
+    } catch {
+      // localStorage may be unavailable
+    }
+  }, []);
 
   // Sync html lang attribute with selected language
   useEffect(() => {
     document.documentElement.lang = language;
   }, [language]);
 
-  // Fetch translations whenever language changes
-  useEffect(() => {
-    let cancelled = false;
-
-    async function load() {
-      try {
-        const res = await fetch(`/data/i18n/${language}.json`);
-        if (!res.ok) throw new Error(`HTTP ${res.status}`);
-        const data: Record<string, string> = await res.json();
-        if (!cancelled) setTranslations(data);
-      } catch {
-        if (!cancelled) setTranslations({});
-      }
-    }
-
-    load();
-    return () => {
-      cancelled = true;
-    };
-  }, [language]);
+  const translations = I18N[language];
 
   const setLanguage = useCallback((lang: Language) => {
     setLanguageState(lang);
