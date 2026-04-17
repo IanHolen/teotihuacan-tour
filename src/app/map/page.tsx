@@ -96,8 +96,10 @@ export default function MapPage() {
       )}
 
       {/* Map */}
-      <div className="flex-1">
-        <DynamicMap pois={pois} onPoiClick={handlePoiClick} />
+      <div className="flex-1 relative min-h-0">
+        <div className="absolute inset-0">
+          <DynamicMap pois={pois} onPoiClick={handlePoiClick} />
+        </div>
       </div>
 
       {/* Selected POI overlay */}
