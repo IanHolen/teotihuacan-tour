@@ -1,36 +1,49 @@
-This is a [Next.js](https://nextjs.org) project bootstrapped with [`create-next-app`](https://nextjs.org/docs/app/api-reference/cli/create-next-app).
+# Guia Teotihuacan
 
-## Getting Started
+Guia interactiva para recorrer las piramides de Teotihuacan. Mapa con GPS en tiempo real, rutas personalizadas por tiempo y audio guias en 3 idiomas.
 
-First, run the development server:
+## Caracteristicas
+
+- Mapa interactivo con tu ubicacion GPS en tiempo real
+- Rutas optimizadas segun tu tiempo disponible (1h, 2h, 3h, dia completo)
+- Audio guias en espanol, portugues e ingles
+- Navegacion guiada entre puntos de interes
+- Funciona offline (PWA) - ideal para zonas con poca senal
+- Diseno mobile-first para usar en el sitio arqueologico
+
+## Tech Stack
+
+- **Next.js 15** - App Router con export estatico
+- **TypeScript** - Tipado fuerte
+- **Tailwind CSS v4** - Estilos mobile-first
+- **Leaflet + react-leaflet** - Mapas interactivos
+- **PWA** - Soporte offline
+
+## Inicio rapido
 
 ```bash
+npm install
 npm run dev
-# or
-yarn dev
-# or
-pnpm dev
-# or
-bun dev
 ```
 
-Open [http://localhost:3000](http://localhost:3000) with your browser to see the result.
+Abre [http://localhost:3000](http://localhost:3000) en tu navegador.
 
-You can start editing the page by modifying `app/page.tsx`. The page auto-updates as you edit the file.
+## Estructura del proyecto
 
-This project uses [`next/font`](https://nextjs.org/docs/app/building-your-application/optimizing/fonts) to automatically optimize and load [Geist](https://vercel.com/font), a new font family for Vercel.
+```
+src/
+  app/          - Paginas (Next.js App Router)
+  components/   - Componentes React
+  context/      - Providers (Language, Navigation)
+  hooks/        - Custom hooks (geolocation, audio, proximity)
+  lib/          - Utilidades (geo, constants)
+  types/        - TypeScript interfaces
+public/
+  audio/        - Archivos de audio por idioma (es/pt/en)
+  data/         - JSON de POIs, rutas e i18n
+  icons/        - Iconos PWA
+```
 
-## Learn More
+## Licencia
 
-To learn more about Next.js, take a look at the following resources:
-
-- [Next.js Documentation](https://nextjs.org/docs) - learn about Next.js features and API.
-- [Learn Next.js](https://nextjs.org/learn) - an interactive Next.js tutorial.
-
-You can check out [the Next.js GitHub repository](https://github.com/vercel/next.js) - your feedback and contributions are welcome!
-
-## Deploy on Vercel
-
-The easiest way to deploy your Next.js app is to use the [Vercel Platform](https://vercel.com/new?utm_medium=default-template&filter=next.js&utm_source=create-next-app&utm_campaign=create-next-app-readme) from the creators of Next.js.
-
-Check out our [Next.js deployment documentation](https://nextjs.org/docs/app/building-your-application/deploying) for more details.
+MIT

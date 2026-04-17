@@ -1,0 +1,204 @@
+[
+  {
+    "slug": "puerta-1",
+    "coordinates": { "lat": 19.6878, "lng": -98.8432 },
+    "category": "gate",
+    "name": {
+      "es": "Puerta 1 - Entrada Principal",
+      "pt": "Portão 1 - Entrada Principal",
+      "en": "Gate 1 - Main Entrance"
+    },
+    "shortDescription": {
+      "es": "Entrada principal a la zona arqueológica de Teotihuacán. Aquí comienza el recorrido por una de las ciudades más importantes del México prehispánico, que llegó a albergar más de 100,000 habitantes en su apogeo. Desde este punto se accede directamente a La Ciudadela y la Calzada de los Muertos.",
+      "pt": "Entrada principal da zona arqueológica de Teotihuacán. Aqui começa o percurso por uma das cidades mais importantes do México pré-hispânico, que chegou a abrigar mais de 100.000 habitantes em seu apogeu. Deste ponto se acessa diretamente A Cidadela e a Calçada dos Mortos.",
+      "en": "Main entrance to the Teotihuacán archaeological zone. Here begins your journey through one of the most important cities in pre-Hispanic Mexico, which housed over 100,000 inhabitants at its peak. From this point you can directly access The Citadel and the Avenue of the Dead."
+    },
+    "audioFile": "puerta-1.mp3",
+    "audioDurationSeconds": 90,
+    "estimatedVisitMinutes": 5,
+    "image": "puerta-1.jpg"
+  },
+  {
+    "slug": "ciudadela",
+    "coordinates": { "lat": 19.6882, "lng": -98.8440 },
+    "category": "temple",
+    "name": {
+      "es": "La Ciudadela",
+      "pt": "A Cidadela",
+      "en": "The Citadel"
+    },
+    "shortDescription": {
+      "es": "Gran recinto ceremonial rodeado por plataformas que formaban un enorme patio hundido de 400 metros por lado. Se cree que fue el centro político y administrativo de Teotihuacán. En su interior se encuentra el Templo de la Serpiente Emplumada y restos de complejos residenciales de la élite.",
+      "pt": "Grande recinto cerimonial cercado por plataformas que formavam um enorme pátio rebaixado de 400 metros de lado. Acredita-se que foi o centro político e administrativo de Teotihuacán. Em seu interior encontra-se o Templo da Serpente Emplumada e restos de complexos residenciais da elite.",
+      "en": "A grand ceremonial enclosure surrounded by platforms forming an enormous sunken courtyard measuring 400 meters per side. It is believed to have been the political and administrative center of Teotihuacán. Inside it houses the Temple of the Feathered Serpent and remains of elite residential complexes."
+    },
+    "audioFile": "ciudadela.mp3",
+    "audioDurationSeconds": 180,
+    "estimatedVisitMinutes": 20,
+    "image": "ciudadela.jpg"
+  },
+  {
+    "slug": "templo-quetzalcoatl",
+    "coordinates": { "lat": 19.6885, "lng": -98.8445 },
+    "category": "temple",
+    "name": {
+      "es": "Templo de la Serpiente Emplumada",
+      "pt": "Templo da Serpente Emplumada",
+      "en": "Temple of the Feathered Serpent"
+    },
+    "shortDescription": {
+      "es": "Uno de los edificios más ricamente decorados de Teotihuacán, con esculturas de serpientes emplumadas y tocados de Tláloc tallados en sus fachadas. Excavaciones revelaron más de 200 individuos sacrificados enterrados bajo y alrededor de la estructura. Data aproximadamente del año 200 d.C. y es testimonio del poder ritual de la ciudad.",
+      "pt": "Um dos edifícios mais ricamente decorados de Teotihuacán, com esculturas de serpentes emplumadas e adornos de Tláloc esculpidos em suas fachadas. Escavações revelaram mais de 200 indivíduos sacrificados enterrados sob e ao redor da estrutura. Data aproximadamente do ano 200 d.C. e é testemunho do poder ritual da cidade.",
+      "en": "One of the most richly decorated buildings in Teotihuacán, featuring sculpted feathered serpents and Tláloc headdresses carved into its facades. Excavations revealed over 200 sacrificed individuals buried beneath and around the structure. It dates to approximately 200 CE and testifies to the city's ritual power."
+    },
+    "audioFile": "templo-quetzalcoatl.mp3",
+    "audioDurationSeconds": 210,
+    "estimatedVisitMinutes": 25,
+    "image": "templo-quetzalcoatl.jpg"
+  },
+  {
+    "slug": "calzada-muertos",
+    "coordinates": { "lat": 19.6920, "lng": -98.8440 },
+    "category": "plaza",
+    "name": {
+      "es": "Calzada de los Muertos",
+      "pt": "Calçada dos Mortos",
+      "en": "Avenue of the Dead"
+    },
+    "shortDescription": {
+      "es": "Eje principal de Teotihuacán que se extiende por más de 2 kilómetros en dirección norte-sur. Los aztecas la nombraron así al confundir las plataformas laterales con tumbas. A lo largo de esta avenida se alinean los edificios más importantes de la ciudad, conectando La Ciudadela con la Plaza de la Luna.",
+      "pt": "Eixo principal de Teotihuacán que se estende por mais de 2 quilômetros na direção norte-sul. Os astecas a nomearam assim ao confundir as plataformas laterais com túmulos. Ao longo desta avenida se alinham os edifícios mais importantes da cidade, conectando A Cidadela com a Praça da Lua.",
+      "en": "The main axis of Teotihuacán stretching over 2 kilometers in a north-south direction. The Aztecs named it so after mistaking the lateral platforms for tombs. Along this avenue stand the city's most important buildings, connecting The Citadel with the Plaza of the Moon."
+    },
+    "audioFile": "calzada-muertos.mp3",
+    "audioDurationSeconds": 150,
+    "estimatedVisitMinutes": 15,
+    "image": "calzada-muertos.jpg"
+  },
+  {
+    "slug": "piramide-sol",
+    "coordinates": { "lat": 19.6925, "lng": -98.8438 },
+    "category": "pyramid",
+    "name": {
+      "es": "Pirámide del Sol",
+      "pt": "Pirâmide do Sol",
+      "en": "Pyramid of the Sun"
+    },
+    "shortDescription": {
+      "es": "Con 65 metros de altura, es la tercera pirámide más grande del mundo y el edificio más imponente de Teotihuacán. Fue construida en dos fases alrededor del año 100 d.C. sobre una cueva natural que pudo tener significado ceremonial. Su base de 225 metros por lado es casi equivalente a la de la Gran Pirámide de Giza.",
+      "pt": "Com 65 metros de altura, é a terceira pirâmide mais grande do mundo e o edifício mais imponente de Teotihuacán. Foi construída em duas fases por volta do ano 100 d.C. sobre uma caverna natural que pode ter tido significado cerimonial. Sua base de 225 metros de lado é quase equivalente à da Grande Pirâmide de Gizé.",
+      "en": "Standing 65 meters tall, it is the third-largest pyramid in the world and the most imposing structure in Teotihuacán. It was built in two phases around 100 CE over a natural cave that may have held ceremonial significance. Its 225-meter base is nearly equivalent to that of the Great Pyramid of Giza."
+    },
+    "audioFile": "piramide-sol.mp3",
+    "audioDurationSeconds": 240,
+    "estimatedVisitMinutes": 45,
+    "image": "piramide-sol.jpg",
+    "elevation": 65,
+    "accessibilityNotes": {
+      "es": "La subida consta de 248 escalones empinados. No recomendada para personas con movilidad reducida o problemas cardíacos. Se recomienda llevar agua y protección solar.",
+      "pt": "A subida consiste em 248 degraus íngremes. Não recomendada para pessoas com mobilidade reduzida ou problemas cardíacos. Recomenda-se levar água e proteção solar.",
+      "en": "The climb consists of 248 steep steps. Not recommended for persons with reduced mobility or heart conditions. It is advisable to bring water and sun protection."
+    }
+  },
+  {
+    "slug": "piramide-luna",
+    "coordinates": { "lat": 19.6953, "lng": -98.8441 },
+    "category": "pyramid",
+    "name": {
+      "es": "Pirámide de la Luna",
+      "pt": "Pirâmide da Lua",
+      "en": "Pyramid of the Moon"
+    },
+    "shortDescription": {
+      "es": "Con 43 metros de altura, corona el extremo norte de la Calzada de los Muertos. Fue construida en siete etapas entre los años 100 y 450 d.C. Excavaciones han revelado ofrendas y entierros rituales con objetos de jade, obsidiana y restos de animales como jaguares y águilas.",
+      "pt": "Com 43 metros de altura, coroa o extremo norte da Calçada dos Mortos. Foi construída em sete etapas entre os anos 100 e 450 d.C. Escavações revelaram oferendas e enterros rituais com objetos de jade, obsidiana e restos de animais como jaguares e águias.",
+      "en": "Standing 43 meters tall, it crowns the northern end of the Avenue of the Dead. It was built in seven stages between 100 and 450 CE. Excavations have revealed offerings and ritual burials containing jade objects, obsidian, and remains of animals such as jaguars and eagles."
+    },
+    "audioFile": "piramide-luna.mp3",
+    "audioDurationSeconds": 200,
+    "estimatedVisitMinutes": 35,
+    "image": "piramide-luna.jpg",
+    "elevation": 43,
+    "accessibilityNotes": {
+      "es": "Solo se permite subir hasta el primer nivel. Los escalones son empinados y estrechos. No apta para personas con movilidad reducida.",
+      "pt": "Só é permitido subir até o primeiro nível. Os degraus são íngremes e estreitos. Não adequada para pessoas com mobilidade reduzida.",
+      "en": "Climbing is only permitted to the first level. The steps are steep and narrow. Not suitable for persons with reduced mobility."
+    }
+  },
+  {
+    "slug": "plaza-luna",
+    "coordinates": { "lat": 19.6948, "lng": -98.8441 },
+    "category": "plaza",
+    "name": {
+      "es": "Plaza de la Luna",
+      "pt": "Praça da Lua",
+      "en": "Plaza of the Moon"
+    },
+    "shortDescription": {
+      "es": "Amplia explanada ceremonial ubicada frente a la Pirámide de la Luna, rodeada por doce plataformas de templos. En su centro se encuentra un altar cuadrangular que servía como escenario para rituales públicos. Desde aquí se obtiene una de las vistas más espectaculares de toda la zona arqueológica.",
+      "pt": "Ampla esplanada cerimonial localizada em frente à Pirâmide da Lua, cercada por doze plataformas de templos. Em seu centro encontra-se um altar quadrangular que servia como palco para rituais públicos. Daqui se obtém uma das vistas mais espetaculares de toda a zona arqueológica.",
+      "en": "A vast ceremonial esplanade located in front of the Pyramid of the Moon, surrounded by twelve temple platforms. At its center stands a quadrangular altar that served as a stage for public rituals. From here you get one of the most spectacular views of the entire archaeological zone."
+    },
+    "audioFile": "plaza-luna.mp3",
+    "audioDurationSeconds": 120,
+    "estimatedVisitMinutes": 15,
+    "image": "plaza-luna.jpg"
+  },
+  {
+    "slug": "palacio-quetzalpapalotl",
+    "coordinates": { "lat": 19.6950, "lng": -98.8448 },
+    "category": "palace",
+    "name": {
+      "es": "Palacio de Quetzalpapálotl",
+      "pt": "Palácio de Quetzalpapálotl",
+      "en": "Palace of Quetzalpapalotl"
+    },
+    "shortDescription": {
+      "es": "Residencia de la élite sacerdotal de Teotihuacán, notable por sus pilares tallados con representaciones de quetzales y mariposas (papálotl). El patio interior conserva columnas decoradas con bajo relieves policromados y restos de pintura mural. Es uno de los complejos residenciales mejor conservados del sitio.",
+      "pt": "Residência da elite sacerdotal de Teotihuacán, notável por seus pilares esculpidos com representações de quetzais e borboletas (papálotl). O pátio interior conserva colunas decoradas com baixos-relevos policromados e restos de pintura mural. É um dos complexos residenciais mais bem preservados do sítio.",
+      "en": "Residence of Teotihuacán's priestly elite, notable for its pillars carved with representations of quetzal birds and butterflies (papálotl). The inner courtyard preserves columns decorated with polychrome bas-reliefs and traces of mural painting. It is one of the best-preserved residential complexes at the site."
+    },
+    "audioFile": "palacio-quetzalpapalotl.mp3",
+    "audioDurationSeconds": 180,
+    "estimatedVisitMinutes": 20,
+    "image": "palacio-quetzalpapalotl.jpg"
+  },
+  {
+    "slug": "murales-puma",
+    "coordinates": { "lat": 19.6946, "lng": -98.8452 },
+    "category": "mural",
+    "name": {
+      "es": "Murales del Puma",
+      "pt": "Murais do Puma",
+      "en": "Puma Murals"
+    },
+    "shortDescription": {
+      "es": "Conjunto de pinturas murales que representan pumas en procesión, considerados guardianes del inframundo en la cosmovisión teotihuacana. Los murales conservan pigmentos originales en tonos rojos, verdes y amarillos. Estos frescos son evidencia de la sofisticada tradición pictórica que distinguió a esta civilización.",
+      "pt": "Conjunto de pinturas murais que representam pumas em procissão, considerados guardiões do submundo na cosmovisão teotihuacana. Os murais conservam pigmentos originais em tons vermelhos, verdes e amarelos. Esses afrescos são evidência da sofisticada tradição pictórica que distinguiu esta civilização.",
+      "en": "A collection of mural paintings depicting pumas in procession, considered guardians of the underworld in Teotihuacán cosmology. The murals preserve original pigments in red, green, and yellow tones. These frescoes are evidence of the sophisticated pictorial tradition that distinguished this civilization."
+    },
+    "audioFile": "murales-puma.mp3",
+    "audioDurationSeconds": 150,
+    "estimatedVisitMinutes": 15,
+    "image": "murales-puma.jpg"
+  },
+  {
+    "slug": "museo-sitio",
+    "coordinates": { "lat": 19.6890, "lng": -98.8425 },
+    "category": "museum",
+    "name": {
+      "es": "Museo de Sitio de Teotihuacán",
+      "pt": "Museu de Sítio de Teotihuacán",
+      "en": "Teotihuacán Site Museum"
+    },
+    "shortDescription": {
+      "es": "Museo que alberga una extensa colección de artefactos encontrados en las excavaciones de Teotihuacán, incluyendo cerámicas, figurillas, herramientas de obsidiana y una maqueta a escala de la ciudad. Ofrece contexto esencial sobre la historia, cultura y vida cotidiana de esta antigua metrópoli mesoamericana.",
+      "pt": "Museu que abriga uma extensa coleção de artefatos encontrados nas escavações de Teotihuacán, incluindo cerâmicas, figurinhas, ferramentas de obsidiana e uma maquete em escala da cidade. Oferece contexto essencial sobre a história, cultura e vida cotidiana desta antiga metrópole mesoamericana.",
+      "en": "A museum housing an extensive collection of artifacts found during Teotihuacán excavations, including ceramics, figurines, obsidian tools, and a scale model of the city. It provides essential context about the history, culture, and daily life of this ancient Mesoamerican metropolis."
+    },
+    "audioFile": "museo-sitio.mp3",
+    "audioDurationSeconds": 120,
+    "estimatedVisitMinutes": 30,
+    "image": "museo-sitio.jpg"
+  }
+]
