@@ -50,8 +50,8 @@
   {
     "slug": "ciudadela",
     "coordinates": {
-      "lat": 19.683,
-      "lng": -98.847
+      "lat": 19.683012,
+      "lng": -98.847023
     },
     "category": "temple",
     "name": {
@@ -158,8 +158,8 @@
   {
     "slug": "calzada-muertos",
     "coordinates": {
-      "lat": 19.688,
-      "lng": -98.8445
+      "lat": 19.688015,
+      "lng": -98.844523
     },
     "category": "plaza",
     "name": {
@@ -320,8 +320,8 @@
   {
     "slug": "plaza-luna",
     "coordinates": {
-      "lat": 19.697,
-      "lng": -98.8445
+      "lat": 19.697012,
+      "lng": -98.844512
     },
     "category": "plaza",
     "name": {
@@ -416,8 +416,8 @@
   {
     "slug": "murales-puma",
     "coordinates": {
-      "lat": 19.6956,
-      "lng": -98.8449
+      "lat": 19.695612,
+      "lng": -98.844918
     },
     "category": "mural",
     "name": {
