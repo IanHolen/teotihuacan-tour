@@ -29,11 +29,11 @@ export default function AudioPlayer({ audioUrl, title }: AudioPlayerProps) {
   if (!audioUrl) return null;
 
   return (
-    <div className="fixed bottom-0 left-0 right-0 z-50 h-20 bg-[#16213e] border-t border-white/10 px-4 flex items-center gap-3">
+    <div className="fixed bottom-0 left-0 right-0 z-50 h-20 bg-white border-t border-[#E8E2D9] shadow-lg px-4 flex items-center gap-3">
       <button
         onClick={toggle}
         disabled={isLoading}
-        className="flex-shrink-0 w-10 h-10 rounded-full bg-[#c4956a] flex items-center justify-center transition-opacity hover:opacity-90 disabled:opacity-50"
+        className="flex-shrink-0 w-10 h-10 rounded-full bg-[#C4956A] flex items-center justify-center transition-colors hover:bg-[#B07D52] disabled:opacity-50"
         aria-label={isPlaying ? 'Pause' : 'Play'}
       >
         {isLoading ? (
@@ -53,11 +53,11 @@ export default function AudioPlayer({ audioUrl, title }: AudioPlayerProps) {
       </button>
 
       <div className="flex-1 min-w-0 flex flex-col gap-1">
-        <p className="text-sm text-white truncate font-medium">
-          {title}{hasError && <span className="text-red-400 ml-2 text-xs">Audio no disponible</span>}
+        <p className="text-sm text-[#2D2D2D] truncate font-medium">
+          {title}{hasError && <span className="text-red-500 ml-2 text-xs">Audio no disponible</span>}
         </p>
         <div className="flex items-center gap-2">
-          <span className="text-xs text-white/60 w-10 text-right flex-shrink-0">
+          <span className="text-xs text-[#9B9B9B] w-10 text-right flex-shrink-0">
             {formatTime(currentTime)}
           </span>
           <input
@@ -66,9 +66,9 @@ export default function AudioPlayer({ audioUrl, title }: AudioPlayerProps) {
             max={duration || 0}
             value={currentTime}
             onChange={(e) => seek(Number(e.target.value))}
-            className="flex-1 h-1 appearance-none bg-white/20 rounded-full cursor-pointer [&::-webkit-slider-thumb]:appearance-none [&::-webkit-slider-thumb]:w-3 [&::-webkit-slider-thumb]:h-3 [&::-webkit-slider-thumb]:rounded-full [&::-webkit-slider-thumb]:bg-[#c4956a]"
+            className="flex-1 h-1 appearance-none bg-[#E8E2D9] rounded-full cursor-pointer [&::-webkit-slider-thumb]:appearance-none [&::-webkit-slider-thumb]:w-3 [&::-webkit-slider-thumb]:h-3 [&::-webkit-slider-thumb]:rounded-full [&::-webkit-slider-thumb]:bg-[#C4956A]"
           />
-          <span className="text-xs text-white/60 w-10 flex-shrink-0">
+          <span className="text-xs text-[#9B9B9B] w-10 flex-shrink-0">
             {formatTime(duration)}
           </span>
         </div>

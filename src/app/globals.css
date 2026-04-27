@@ -3,42 +3,42 @@
 
 :root {
   --color-primary: #c4956a;
-  --color-primary-dark: #a07850;
-  --color-bg-dark: #1a1a2e;
-  --color-bg-card: #16213e;
-  --color-bg-card-hover: #1a2745;
-  --color-text: #e8e8e8;
-  --color-text-muted: #a0a0b0;
-  --color-accent: #e94560;
-  --color-success: #4ade80;
+  --color-primary-dark: #b07d52;
+  --color-bg: #faf7f2;
+  --color-bg-card: #ffffff;
+  --color-bg-secondary: #f0ebe3;
+  --color-text: #2d2d2d;
+  --color-text-muted: #6b6b6b;
+  --color-text-tertiary: #9b9b9b;
+  --color-border: #e8e2d9;
+  --color-accent-deep: #5c3d2e;
 }
 
 @theme inline {
   --color-primary: var(--color-primary);
   --color-primary-dark: var(--color-primary-dark);
-  --color-bg-dark: var(--color-bg-dark);
+  --color-bg: var(--color-bg);
   --color-bg-card: var(--color-bg-card);
-  --color-bg-card-hover: var(--color-bg-card-hover);
-  --color-accent: var(--color-accent);
-  --color-success: var(--color-success);
+  --color-bg-secondary: var(--color-bg-secondary);
+  --color-border: var(--color-border);
   --font-sans: var(--font-geist);
 }
 
 body {
-  background: var(--color-bg-dark);
+  background: var(--color-bg);
   color: var(--color-text);
   font-family: var(--font-sans), system-ui, sans-serif;
 }
 
-/* Leaflet overrides for dark theme */
+/* Leaflet overrides */
 .leaflet-container {
-  background: #1a1a2e;
+  background: #faf7f2;
 }
 
 .leaflet-control-zoom a {
-  background-color: var(--color-bg-card) !important;
-  color: var(--color-text) !important;
-  border-color: var(--color-primary) !important;
+  background-color: #ffffff !important;
+  color: #2d2d2d !important;
+  border-color: #e8e2d9 !important;
 }
 
 /* Pulsing dot for user location */

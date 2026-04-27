@@ -34,11 +34,9 @@ export default function CreditsPage() {
   const router = useRouter();
   const { language } = useLanguage();
 
-  // Collect all credits: main images + gallery images
   const allCredits = useMemo(() => {
     const items: Array<{ poiName: string; image: string; author: string; license: string; source?: string; alt?: string }> = [];
 
-    // Main POI images from credits.json
     for (const credit of credits) {
       const poi = poiMap.get(credit.poiSlug);
       items.push({
@@ -50,7 +48,6 @@ export default function CreditsPage() {
       });
     }
 
-    // Gallery images from pois.json
     for (const poi of pois) {
       if (poi.gallery) {
         for (const img of poi.gallery) {
@@ -69,29 +66,29 @@ export default function CreditsPage() {
   }, [language]);
 
   return (
-    <div className="flex flex-col flex-1 bg-gradient-to-b from-[#1a1a2e] to-[#232342]">
+    <div className="flex flex-col flex-1 bg-[#FAF7F2]">
       {/* Header */}
       <div className="px-5 pt-6 pb-4">
         <div className="flex items-center mb-6">
           <button
             onClick={() => router.back()}
-            className="w-10 h-10 rounded-full bg-[#16213e]/80 border border-white/10 flex items-center justify-center"
+            className="w-10 h-10 rounded-full bg-white border border-[#E8E2D9] shadow-sm flex items-center justify-center"
             aria-label="Back"
           >
-            <svg className="w-5 h-5 text-white" viewBox="0 0 24 24" fill="none" stroke="currentColor" strokeWidth="2">
+            <svg className="w-5 h-5 text-[#2D2D2D]" viewBox="0 0 24 24" fill="none" stroke="currentColor" strokeWidth="2">
               <path d="M15 18l-6-6 6-6" />
             </svg>
           </button>
         </div>
 
-        <h1 className="text-2xl font-bold text-white mb-2">
+        <h1 className="text-2xl font-bold text-[#2D2D2D] mb-2">
           {language === 'es'
             ? 'Créditos de imágenes'
             : language === 'pt'
               ? 'Créditos de imagens'
               : 'Image Credits'}
         </h1>
-        <p className="text-sm text-white/60 leading-relaxed">
+        <p className="text-sm text-[#6B6B6B] leading-relaxed">
           {language === 'es'
             ? 'Todas las imágenes utilizadas en esta aplicación provienen de Wikimedia Commons y son distribuidas bajo licencias Creative Commons.'
             : language === 'pt'
@@ -106,7 +103,7 @@ export default function CreditsPage() {
           {allCredits.map((credit, i) => (
             <div
               key={`${credit.image}-${i}`}
-              className="rounded-xl bg-[#16213e] border border-white/10 overflow-hidden"
+              className="rounded-xl bg-white border border-[#E8E2D9] shadow-sm overflow-hidden"
             >
               <div className="flex gap-3 p-3">
                 <img
@@ -115,16 +112,16 @@ export default function CreditsPage() {
                   className="flex-shrink-0 w-16 h-16 rounded-lg object-cover"
                 />
                 <div className="flex-1 min-w-0">
-                  <p className="text-sm font-semibold text-white truncate">
+                  <p className="text-sm font-semibold text-[#2D2D2D] truncate">
                     {credit.poiName}
                   </p>
                   {credit.alt && (
-                    <p className="text-[10px] text-white/40 truncate">{credit.alt}</p>
+                    <p className="text-[10px] text-[#9B9B9B] truncate">{credit.alt}</p>
                   )}
-                  <p className="text-xs text-white/60 mt-0.5">
+                  <p className="text-xs text-[#6B6B6B] mt-0.5">
                     {language === 'es' ? 'Autor' : language === 'pt' ? 'Autor' : 'Author'}: {credit.author}
                   </p>
-                  <p className="text-xs text-[#c4956a] mt-0.5">
+                  <p className="text-xs text-[#C4956A] mt-0.5">
                     {credit.license}
                   </p>
                   {credit.source && (
@@ -132,7 +129,7 @@ export default function CreditsPage() {
                       href={credit.source}
                       target="_blank"
                       rel="noopener noreferrer"
-                      className="text-[10px] text-white/40 hover:text-white/60 underline mt-1 inline-block truncate max-w-full"
+                      className="text-[10px] text-[#9B9B9B] hover:text-[#6B6B6B] underline mt-1 inline-block truncate max-w-full"
                     >
                       {language === 'es' ? 'Ver fuente' : language === 'pt' ? 'Ver fonte' : 'View source'}
                     </a>

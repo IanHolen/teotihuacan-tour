@@ -13,15 +13,15 @@ export default function LanguageSwitcher() {
   const { language, setLanguage } = useLanguage();
 
   return (
-    <div className="flex items-center gap-1 rounded-full bg-white/5 p-1">
+    <div className="flex items-center gap-1 rounded-full bg-[#F0EBE3] p-1">
       {LANGUAGES.map(({ code, label }) => (
         <button
           key={code}
           onClick={() => setLanguage(code)}
           className={`px-3 py-1.5 rounded-full text-xs font-semibold transition-colors ${
             language === code
-              ? 'bg-[#c4956a] text-white'
-              : 'text-white/50 hover:text-white/80'
+              ? 'bg-[#C4956A] text-white'
+              : 'text-[#6B6B6B] hover:text-[#2D2D2D]'
           }`}
         >
           {label}

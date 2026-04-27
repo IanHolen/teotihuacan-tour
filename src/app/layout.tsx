@@ -25,7 +25,7 @@ export const viewport: Viewport = {
   initialScale: 1,
   maximumScale: 1,
   userScalable: false,
-  themeColor: "#c4956a",
+  themeColor: "#FAF7F2",
 };
 
 export default function RootLayout({
@@ -35,7 +35,7 @@ export default function RootLayout({
 }>) {
   return (
     <html lang="es" className={`${geist.variable} h-full antialiased`}>
-      <body suppressHydrationWarning className="min-h-full flex flex-col bg-[#1a1a2e] text-white font-[family-name:var(--font-geist)]">
+      <body suppressHydrationWarning className="min-h-full flex flex-col bg-[#FAF7F2] text-[#2D2D2D] font-[family-name:var(--font-geist)]">
         <Providers>{children}</Providers>
       </body>
     </html>
