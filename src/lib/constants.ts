@@ -10,11 +10,8 @@ export const TEOTIHUACAN_BOUNDS: [[number, number], [number, number]] = [
   [19.702, -98.830],
 ];
 
-/** Distance in meters at which the user is considered to have arrived. */
-export const ARRIVED_THRESHOLD = 30;
-
-/** Distance in meters at which the user is approaching a POI. */
-export const APPROACHING_THRESHOLD = 100;
+/** Default proximity radius in meters when a POI doesn't specify one. */
+export const DEFAULT_PROXIMITY_RADIUS = 40;
 
 export const DEFAULT_LANGUAGE: Language = 'es';
 

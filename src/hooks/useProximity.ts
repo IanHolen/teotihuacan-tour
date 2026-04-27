@@ -3,15 +3,13 @@
 import { useMemo } from 'react';
 import type { Coordinates } from '@/types';
 import { haversineDistance } from '@/lib/geo';
-import { APPROACHING_THRESHOLD, ARRIVED_THRESHOLD } from '@/lib/constants';
+import { DEFAULT_PROXIMITY_RADIUS } from '@/lib/constants';
 
 interface ProximityState {
   /** Distance in meters, or null if the user position is unknown. */
   distance: number | null;
-  /** Whether the user is within the approaching threshold. */
-  isApproaching: boolean;
-  /** Whether the user is within the arrived threshold. */
-  hasArrived: boolean;
+  /** Whether the user is within the proximity radius. */
+  isNearby: boolean;
 }
 
 /**
@@ -19,22 +17,23 @@ interface ProximityState {
  *
  * @param userPosition - Current user GPS coordinates, or null if unavailable.
  * @param targetPosition - The target POI coordinates.
+ * @param radius - Custom proximity radius in meters. Defaults to DEFAULT_PROXIMITY_RADIUS.
  */
 export function useProximity(
   userPosition: Coordinates | null,
   targetPosition: Coordinates | null,
+  radius: number = DEFAULT_PROXIMITY_RADIUS,
 ): ProximityState {
   return useMemo<ProximityState>(() => {
     if (!userPosition || !targetPosition) {
-      return { distance: null, isApproaching: false, hasArrived: false };
+      return { distance: null, isNearby: false };
     }
 
     const distance = haversineDistance(userPosition, targetPosition);
 
     return {
       distance,
-      isApproaching: distance <= APPROACHING_THRESHOLD,
-      hasArrived: distance <= ARRIVED_THRESHOLD,
+      isNearby: distance <= radius,
     };
-  }, [userPosition, targetPosition]);
+  }, [userPosition, targetPosition, radius]);
 }

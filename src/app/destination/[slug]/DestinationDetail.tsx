@@ -5,6 +5,7 @@ import { useParams, useRouter } from 'next/navigation';
 import { useLanguage } from '@/context/LanguageContext';
 import { useGeolocation } from '@/hooks/useGeolocation';
 import { haversineDistance } from '@/lib/geo';
+import { DEFAULT_PROXIMITY_RADIUS } from '@/lib/constants';
 import LanguageSwitcher from '@/components/LanguageSwitcher';
 import type { Destination, PointOfInterest } from '@/types';
 import destinationsData from '../../../../public/data/destinations.json';
@@ -34,8 +35,6 @@ export default function DestinationDetail() {
   const { language } = useLanguage();
   const { position } = useGeolocation();
 
-  const PROXIMITY_THRESHOLD = 50; // meters
-
   const destination = useMemo(
     () => destinations.find((d) => d.slug === params.slug) ?? null,
     [params.slug],
@@ -49,14 +48,18 @@ export default function DestinationDetail() {
       .filter((p): p is PointOfInterest => p != null);
   }, [destination]);
 
-  const nearbyPois = useMemo(() => {
-    if (!position) return new Set<string>();
-    const nearby = new Set<string>();
+  // Find the single closest POI within its proximity radius
+  const nearestPoiSlug = useMemo(() => {
+    if (!position) return null;
+    let closest: { slug: string; dist: number } | null = null;
     for (const poi of destinationPois) {
+      const radius = (poi as PointOfInterest & { proximityRadius?: number }).proximityRadius ?? DEFAULT_PROXIMITY_RADIUS;
       const dist = haversineDistance(position, poi.coordinates);
-      if (dist <= PROXIMITY_THRESHOLD) nearby.add(poi.slug);
+      if (dist <= radius && (!closest || dist < closest.dist)) {
+        closest = { slug: poi.slug, dist };
+      }
     }
-    return nearby;
+    return closest?.slug ?? null;
   }, [position, destinationPois]);
 
   if (!destination) {
@@ -120,7 +123,7 @@ export default function DestinationDetail() {
         <div className="flex flex-col gap-3">
           {destinationPois.map((poi) => {
             const categoryStyle = CATEGORY_COLORS[poi.category] ?? 'bg-stone-100 text-stone-800';
-            const isNearby = nearbyPois.has(poi.slug);
+            const isNearby = nearestPoiSlug === poi.slug;
             return (
               <button
                 key={poi.slug}
