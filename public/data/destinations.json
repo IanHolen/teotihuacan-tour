@@ -1,0 +1,28 @@
+[
+  {
+    "slug": "teotihuacan",
+    "name": {
+      "es": "Teotihuacán",
+      "pt": "Teotihuacán",
+      "en": "Teotihuacán"
+    },
+    "image": "teotihuacan.jpg",
+    "description": {
+      "es": "Explora la ciudad de los dioses, una de las metrópolis más impresionantes del México prehispánico con pirámides monumentales y murales ancestrales.",
+      "pt": "Explore a cidade dos deuses, uma das metrópoles mais impressionantes do México pré-hispânico com pirâmides monumentais e murais ancestrais.",
+      "en": "Explore the city of the gods, one of the most impressive metropolises of pre-Hispanic Mexico with monumental pyramids and ancient murals."
+    },
+    "poiSlugs": [
+      "puerta-1",
+      "ciudadela",
+      "templo-quetzalcoatl",
+      "calzada-muertos",
+      "piramide-sol",
+      "piramide-luna",
+      "plaza-luna",
+      "palacio-quetzalpapalotl",
+      "murales-puma",
+      "museo-sitio"
+    ]
+  }
+]

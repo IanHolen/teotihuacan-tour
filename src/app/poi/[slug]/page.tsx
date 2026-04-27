@@ -1,3 +1,4 @@
+import { Suspense } from 'react';
 import PoiDetail from './PoiDetail';
 
 const POI_SLUGS = [
@@ -18,5 +19,9 @@ export function generateStaticParams() {
 }
 
 export default function PoiPage() {
-  return <PoiDetail />;
+  return (
+    <Suspense>
+      <PoiDetail />
+    </Suspense>
+  );
 }

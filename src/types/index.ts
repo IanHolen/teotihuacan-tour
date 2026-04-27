@@ -1,9 +1,15 @@
 export type Language = 'es' | 'pt' | 'en';
-export type RouteDuration = '1h' | '2h' | '3h' | 'full';
 
 export interface Coordinates {
   lat: number;
   lng: number;
+}
+
+export interface GalleryImage {
+  src: string;
+  alt: string;
+  author: string;
+  license: string;
 }
 
 export interface PointOfInterest {
@@ -18,25 +24,13 @@ export interface PointOfInterest {
   image: string;
   elevation?: number;
   accessibilityNotes?: Record<Language, string>;
+  gallery?: GalleryImage[];
 }
 
-export interface RouteStop {
-  poiSlug: string;
-  order: number;
-  walkingMinutesFromPrevious: number;
-}
-
-export interface Route {
-  duration: RouteDuration;
-  label: Record<Language, string>;
-  description: Record<Language, string>;
-  totalWalkingMinutes: number;
-  totalStops: number;
-  stops: RouteStop[];
-}
-
-export interface Parking {
-  id: string;
-  coordinates: Coordinates;
+export interface Destination {
+  slug: string;
   name: Record<Language, string>;
+  image: string;
+  description: Record<Language, string>;
+  poiSlugs: string[];
 }

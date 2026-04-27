@@ -1,34 +1,16 @@
 'use client';
 
-import { useState } from 'react';
 import { useRouter } from 'next/navigation';
 import { useLanguage } from '@/context/LanguageContext';
-import { useNavigation } from '@/context/NavigationContext';
 import LanguageSwitcher from '@/components/LanguageSwitcher';
-import RouteSelector from '@/components/Navigation/RouteSelector';
-import StartPointSelector from '@/components/Navigation/StartPointSelector';
-import ParkingSelector from '@/components/Navigation/ParkingSelector';
-import type { Parking, RouteDuration } from '@/types';
+import type { Destination } from '@/types';
+import destinationsData from '../../public/data/destinations.json';
+
+const destinations = destinationsData as Destination[];
 
 export default function HomePage() {
   const router = useRouter();
   const { language } = useLanguage();
-  const { routes, setActiveRoute, startNavigation, setParking } = useNavigation();
-  const [selectedRoute, setSelectedRoute] = useState<RouteDuration | null>(null);
-  const [startIndex, setStartIndex] = useState(0);
-  const [selectedParking, setSelectedParking] = useState<Parking | null>(null);
-
-  function handleRouteSelect(duration: RouteDuration) {
-    setSelectedRoute(duration);
-    setStartIndex(0);
-  }
-
-  function handleStartTour() {
-    if (!selectedRoute) return;
-    setParking(selectedParking);
-    startNavigation(startIndex, selectedRoute);
-    router.push('/map');
-  }
 
   return (
     <div className="flex flex-col flex-1 items-center px-5 py-8 bg-gradient-to-b from-[#1a1a2e] to-[#232342]">
@@ -47,76 +29,89 @@ export default function HomePage() {
           </svg>
         </div>
         <h1 className="text-3xl font-bold text-white mb-3 tracking-tight">
-          Guia Teotihuacan
+          {language === 'es'
+            ? 'Audio Guías'
+            : language === 'pt'
+              ? 'Áudio Guias'
+              : 'Audio Guides'}
         </h1>
         <p className="text-base text-white/60 leading-relaxed">
           {language === 'es'
-            ? 'Explora la ciudad de los dioses con audio guia, mapa interactivo y rutas personalizadas.'
+            ? 'Elige un destino y explora sus puntos de interés con audioguía interactiva.'
             : language === 'pt'
-              ? 'Explore a cidade dos deuses com audioguia, mapa interativo e rotas personalizadas.'
-              : 'Explore the city of the gods with audio guide, interactive map and personalized routes.'}
+              ? 'Escolha um destino e explore seus pontos de interesse com audioguia interativo.'
+              : 'Choose a destination and explore its points of interest with an interactive audio guide.'}
         </p>
       </div>
 
-      {/* Route selection */}
-      <div className="w-full max-w-md mb-8">
-        <h2 className="text-sm font-semibold text-white/40 uppercase tracking-wider mb-3">
+      {/* Destinations grid */}
+      <div className="w-full max-w-md">
+        <h2 className="text-sm font-semibold text-white/40 uppercase tracking-wider mb-4">
           {language === 'es'
-            ? 'Elige tu ruta'
+            ? 'Destinos disponibles'
             : language === 'pt'
-              ? 'Escolha sua rota'
-              : 'Choose your route'}
+              ? 'Destinos disponíveis'
+              : 'Available destinations'}
         </h2>
-        <RouteSelector onSelect={handleRouteSelect} />
+
+        <div className="grid grid-cols-1 gap-4">
+          {destinations.map((dest) => (
+            <button
+              key={dest.slug}
+              onClick={() => router.push(`/destination/${dest.slug}`)}
+              className="group relative w-full rounded-2xl overflow-hidden border border-white/10 bg-[#16213e] text-left transition-all hover:border-[#c4956a]/40 hover:shadow-lg hover:shadow-[#c4956a]/10 active:scale-[0.98]"
+            >
+              {/* Gradient background */}
+              <div className="absolute inset-0 bg-gradient-to-br from-amber-900/30 via-orange-800/20 to-[#16213e] opacity-60 group-hover:opacity-80 transition-opacity" />
+
+              {/* Icon */}
+              <div className="absolute top-4 right-4 opacity-10 group-hover:opacity-20 transition-opacity">
+                <svg className="w-20 h-20 text-[#c4956a]" viewBox="0 0 24 24" fill="none" stroke="currentColor" strokeWidth="0.8">
+                  <path d="M12 2L2 19h20L12 2z" />
+                  <path d="M12 2v17" />
+                  <path d="M7 12h10" />
+                </svg>
+              </div>
+
+              <div className="relative p-5">
+                <h3 className="text-xl font-bold text-white mb-2">
+                  {dest.name[language]}
+                </h3>
+                <p className="text-sm text-white/60 leading-relaxed mb-4">
+                  {dest.description[language]}
+                </p>
+                <div className="flex items-center gap-3">
+                  <span className="text-xs text-[#c4956a] font-medium bg-[#c4956a]/10 px-3 py-1 rounded-full">
+                    {dest.poiSlugs.length} {language === 'es' ? 'puntos' : language === 'pt' ? 'pontos' : 'points'}
+                  </span>
+                  <span className="text-xs text-white/40 flex items-center gap-1">
+                    <svg className="w-3.5 h-3.5" viewBox="0 0 24 24" fill="none" stroke="currentColor" strokeWidth="2">
+                      <path d="M5 12h14M12 5l7 7-7 7" />
+                    </svg>
+                    {language === 'es'
+                      ? 'Explorar'
+                      : language === 'pt'
+                        ? 'Explorar'
+                        : 'Explore'}
+                  </span>
+                </div>
+              </div>
+            </button>
+          ))}
+        </div>
       </div>
 
-      {/* Start point selection */}
-      {selectedRoute && routes[selectedRoute] && (
-        <div className="w-full max-w-md mb-6">
-          <h2 className="text-sm font-semibold text-white/40 uppercase tracking-wider mb-3">
-            {language === 'es'
-              ? '¿Desde dónde empiezas?'
-              : language === 'pt'
-                ? 'De onde você começa?'
-                : 'Where do you start?'}
-          </h2>
-          <StartPointSelector
-            route={routes[selectedRoute]}
-            selectedIndex={startIndex}
-            onSelect={setStartIndex}
-          />
-        </div>
-      )}
-
-      {/* Parking selection */}
-      {selectedRoute && (
-        <div className="w-full max-w-md mb-6">
-          <h2 className="text-sm font-semibold text-white/40 uppercase tracking-wider mb-3">
-            {language === 'es'
-              ? '¿Dónde estacionaste?'
-              : language === 'pt'
-                ? 'Onde você estacionou?'
-                : 'Where did you park?'}
-          </h2>
-          <ParkingSelector
-            selectedId={selectedParking?.id ?? null}
-            onSelect={setSelectedParking}
-          />
-        </div>
-      )}
-
-      {/* Start button */}
-      <div className="w-full max-w-md mt-auto">
+      {/* Footer */}
+      <div className="w-full max-w-md mt-8 pt-4 border-t border-white/5 text-center">
         <button
-          onClick={handleStartTour}
-          disabled={!selectedRoute}
-          className="w-full h-14 rounded-xl bg-[#c4956a] text-white text-lg font-semibold transition-all hover:opacity-90 disabled:opacity-30 disabled:cursor-not-allowed"
+          onClick={() => router.push('/credits')}
+          className="text-xs text-white/30 hover:text-white/50 transition-colors"
         >
           {language === 'es'
-            ? 'Iniciar Recorrido'
+            ? 'Créditos de imágenes'
             : language === 'pt'
-              ? 'Iniciar Tour'
-              : 'Start Tour'}
+              ? 'Créditos de imagens'
+              : 'Image credits'}
         </button>
       </div>
     </div>
