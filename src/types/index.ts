@@ -25,6 +25,7 @@ export interface PointOfInterest {
   elevation?: number;
   accessibilityNotes?: Record<Language, string>;
   gallery?: GalleryImage[];
+  proximityRadius?: number;
 }
 
 export interface Destination {

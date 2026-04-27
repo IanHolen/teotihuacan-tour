@@ -2,8 +2,8 @@
   {
     "slug": "puerta-1",
     "coordinates": {
-      "lat": 19.6842,
-      "lng": -98.8436
+      "lat": 19.683246,
+      "lng": -98.850316
     },
     "category": "gate",
     "name": {
@@ -44,13 +44,14 @@
         "author": "Emma Nunez",
         "license": "CC BY-SA 3.0"
       }
-    ]
+    ],
+    "proximityRadius": 40
   },
   {
     "slug": "ciudadela",
     "coordinates": {
-      "lat": 19.6852,
-      "lng": -98.8443
+      "lat": 19.683,
+      "lng": -98.847
     },
     "category": "temple",
     "name": {
@@ -97,13 +98,14 @@
         "author": "Wolfgang Sauber",
         "license": "CC BY-SA 3.0"
       }
-    ]
+    ],
+    "proximityRadius": 80
   },
   {
     "slug": "templo-quetzalcoatl",
     "coordinates": {
-      "lat": 19.6855,
-      "lng": -98.8443
+      "lat": 19.681902,
+      "lng": -98.846171
     },
     "category": "temple",
     "name": {
@@ -150,13 +152,14 @@
         "author": "rosemania",
         "license": "CC BY 2.0"
       }
-    ]
+    ],
+    "proximityRadius": 30
   },
   {
     "slug": "calzada-muertos",
     "coordinates": {
-      "lat": 19.6905,
-      "lng": -98.8441
+      "lat": 19.688,
+      "lng": -98.8445
     },
     "category": "plaza",
     "name": {
@@ -197,13 +200,14 @@
         "author": "Erick1984",
         "license": "CC BY 3.0"
       }
-    ]
+    ],
+    "proximityRadius": 40
   },
   {
     "slug": "piramide-sol",
     "coordinates": {
-      "lat": 19.6925,
-      "lng": -98.8431
+      "lat": 19.692407,
+      "lng": -98.843541
     },
     "category": "pyramid",
     "name": {
@@ -250,13 +254,14 @@
         "author": "Arian Zwegers",
         "license": "CC BY 2.0"
       }
-    ]
+    ],
+    "proximityRadius": 90
   },
   {
     "slug": "piramide-luna",
     "coordinates": {
-      "lat": 19.696,
-      "lng": -98.8443
+      "lat": 19.699578,
+      "lng": -98.843969
     },
     "category": "pyramid",
     "name": {
@@ -309,13 +314,14 @@
         "author": "Juan Carlos Fonseca Mata",
         "license": "CC BY-SA 4.0"
       }
-    ]
+    ],
+    "proximityRadius": 65
   },
   {
     "slug": "plaza-luna",
     "coordinates": {
-      "lat": 19.6953,
-      "lng": -98.8443
+      "lat": 19.697,
+      "lng": -98.8445
     },
     "category": "plaza",
     "name": {
@@ -356,13 +362,14 @@
         "author": "Juan Carlos Fonseca Mata",
         "license": "CC BY-SA 4.0"
       }
-    ]
+    ],
+    "proximityRadius": 50
   },
   {
     "slug": "palacio-quetzalpapalotl",
     "coordinates": {
-      "lat": 19.6952,
-      "lng": -98.8453
+      "lat": 19.697826,
+      "lng": -98.845717
     },
     "category": "palace",
     "name": {
@@ -403,13 +410,14 @@
         "author": "Alfonso Mendoza Ramos",
         "license": "CC BY-SA 3.0"
       }
-    ]
+    ],
+    "proximityRadius": 30
   },
   {
     "slug": "murales-puma",
     "coordinates": {
-      "lat": 19.6948,
-      "lng": -98.8458
+      "lat": 19.6956,
+      "lng": -98.8449
     },
     "category": "mural",
     "name": {
@@ -450,13 +458,14 @@
         "author": "Dennis Jarvis",
         "license": "CC BY-SA 2.0"
       }
-    ]
+    ],
+    "proximityRadius": 25
   },
   {
     "slug": "museo-sitio",
     "coordinates": {
-      "lat": 19.6848,
-      "lng": -98.843
+      "lat": 19.690325,
+      "lng": -98.844044
     },
     "category": "museum",
     "name": {
@@ -497,6 +506,7 @@
         "author": "Wolfgang Sauber",
         "license": "CC BY-SA 3.0"
       }
-    ]
+    ],
+    "proximityRadius": 40
   }
 ]
