@@ -61,6 +61,16 @@ body {
   animation: pulse 2s ease-in-out infinite;
 }
 
+/* Proximity pulse for nearby POIs */
+@keyframes proximity-pulse {
+  0%, 100% { border-color: #C4956A; box-shadow: 0 0 0 0 rgba(196,149,106,0.4); }
+  50% { border-color: #C4956A; box-shadow: 0 0 12px 4px rgba(196,149,106,0.2); }
+}
+
+.proximity-pulse {
+  animation: proximity-pulse 2s ease-in-out infinite;
+}
+
 /* Audio progress bar */
 input[type="range"]::-webkit-slider-thumb {
   -webkit-appearance: none;

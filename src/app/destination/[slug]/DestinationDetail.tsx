@@ -3,6 +3,8 @@
 import { useMemo } from 'react';
 import { useParams, useRouter } from 'next/navigation';
 import { useLanguage } from '@/context/LanguageContext';
+import { useGeolocation } from '@/hooks/useGeolocation';
+import { haversineDistance } from '@/lib/geo';
 import LanguageSwitcher from '@/components/LanguageSwitcher';
 import type { Destination, PointOfInterest } from '@/types';
 import destinationsData from '../../../../public/data/destinations.json';
@@ -30,6 +32,9 @@ export default function DestinationDetail() {
   const params = useParams<{ slug: string }>();
   const router = useRouter();
   const { language } = useLanguage();
+  const { position } = useGeolocation();
+
+  const PROXIMITY_THRESHOLD = 50; // meters
 
   const destination = useMemo(
     () => destinations.find((d) => d.slug === params.slug) ?? null,
@@ -43,6 +48,16 @@ export default function DestinationDetail() {
       .map((slug) => poiMap.get(slug))
       .filter((p): p is PointOfInterest => p != null);
   }, [destination]);
+
+  const nearbyPois = useMemo(() => {
+    if (!position) return new Set<string>();
+    const nearby = new Set<string>();
+    for (const poi of destinationPois) {
+      const dist = haversineDistance(position, poi.coordinates);
+      if (dist <= PROXIMITY_THRESHOLD) nearby.add(poi.slug);
+    }
+    return nearby;
+  }, [position, destinationPois]);
 
   if (!destination) {
     return (
@@ -105,11 +120,12 @@ export default function DestinationDetail() {
         <div className="flex flex-col gap-3">
           {destinationPois.map((poi) => {
             const categoryStyle = CATEGORY_COLORS[poi.category] ?? 'bg-stone-100 text-stone-800';
+            const isNearby = nearbyPois.has(poi.slug);
             return (
               <button
                 key={poi.slug}
                 onClick={() => router.push(`/poi/${poi.slug}?from=${destination.slug}`)}
-                className="group w-full rounded-xl bg-white border border-[#E8E2D9] shadow-sm p-3 text-left transition-all hover:shadow-md hover:border-[#C4956A]/30 active:scale-[0.98]"
+                className={`group w-full rounded-xl bg-white border shadow-sm p-3 text-left transition-all hover:shadow-md hover:border-[#C4956A]/30 active:scale-[0.98] ${isNearby ? 'proximity-pulse' : 'border-[#E8E2D9]'}`}
               >
                 <div className="flex items-center gap-3">
                   {/* Thumbnail */}
@@ -138,6 +154,11 @@ export default function DestinationDetail() {
                     <h3 className="text-sm font-semibold text-[#2D2D2D] truncate">
                       {poi.name[language]}
                     </h3>
+                    {isNearby && (
+                      <p className="text-[10px] text-[#C4956A] font-medium mt-0.5">
+                        {language === 'es' ? 'Estás cerca' : language === 'pt' ? 'Você está perto' : "You're nearby"}
+                      </p>
+                    )}
                   </div>
 
                   {/* Arrow */}
